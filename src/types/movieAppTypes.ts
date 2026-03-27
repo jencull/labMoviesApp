@@ -20,11 +20,16 @@ export type MovieImage = {
   file_path: string;
   aspect_ratio?: number; //some props are optional...
   height?: number;
-  iso_639_1?: string;
+  iso_639_1?: string; // iso code for languages
   vote_average?: number;
   vote_count?: number;
   width?: number;
 }
+
+export type ProductionCountry = {
+  iso_3166_1: string; // iso code for countries
+  name: string;
+};
 
 export type MoviePageProps = {
   movie: MovieDetailsProps;

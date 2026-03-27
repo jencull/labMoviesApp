@@ -21,7 +21,7 @@ const styles = {
     },
 };
 
-const MovieDetails= (movie: MovieDetailsProps) => {
+const MovieDetails = (movie: MovieDetailsProps) => {
 
     return (
         <>
@@ -40,6 +40,16 @@ const MovieDetails= (movie: MovieDetailsProps) => {
                 {(movie.genres ?? []).map((g) => (
                     <li key={`${g.id}-${g.name}`}>
                         <Chip label={g.name ?? "Unknown"} />
+                    </li>
+                ))}
+            </Paper>
+            <Paper component="ul" sx={styles.chipSet}>
+                <li>
+                    <Chip label="Production Countries" sx={styles.chipLabel} color="primary" />
+                </li>
+                {(movie.production_countries ?? []).map((c) => (
+                    <li key={c.name}>
+                        <Chip label={c.name} />
                     </li>
                 ))}
             </Paper>
