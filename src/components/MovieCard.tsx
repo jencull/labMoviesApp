@@ -1,3 +1,4 @@
+import React, { MouseEvent } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,10 +11,10 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar"; // New Import
 import img from '../images/film-poster-placeholder.png';
 import { DiscoverMovieOverviewProps } from "../types/movieAppTypes";
 import { Link } from "react-router-dom";
-
 
 const styles = {
   card: { maxWidth: 345 },
@@ -23,12 +24,34 @@ const styles = {
   },
 };
 
-const MovieCard = (movie: DiscoverMovieOverviewProps) => {
+interface MovieCardProps {
+  movie: DiscoverMovieOverviewProps;
+  selectFavourite: (movieId: number) => void;
+}
 
+const MovieCard = ({ movie, selectFavourite }: MovieCardProps) => {
+
+  const handleAddToFavourite = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    selectFavourite(movie.id);
+  };
 
   return (
     <Card sx={styles.card}>
-      <CardHeader title={movie.title ?? "Untitled"} />
+      <CardHeader
+        avatar={
+          movie.favourite ? (
+            <Avatar sx={styles.avatar}>
+              <FavoriteIcon />
+            </Avatar>
+          ) : null
+        }
+        title={
+          <Typography variant="h5" component="p">
+            {movie.title}{" "}
+          </Typography>
+        }
+      />
       <CardMedia
         sx={styles.media}
         image={
@@ -54,7 +77,7 @@ const MovieCard = (movie: DiscoverMovieOverviewProps) => {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" >
+        <IconButton aria-label="add to favourites" onClick={handleAddToFavourite}>
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
         <Link to={`/movies/${movie.id}`}>
@@ -62,8 +85,8 @@ const MovieCard = (movie: DiscoverMovieOverviewProps) => {
             More Info ...
           </Button>
         </Link>
-    </CardActions>
-    </Card >
+      </CardActions>
+    </Card>
   );
 }
 

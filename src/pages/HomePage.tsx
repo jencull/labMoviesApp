@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";  // Changed
+import { useState, useEffect } from "react";
 import Header from "../components/HeaderMovieList";
 import FilterCard from "../components/FilterMoviesCard";
 import Grid from "@mui/material/Grid";
 import MovieList from "../components/MovieList";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-import { FilterOption,DiscoverMovieOverviewProps } from "../types/movieAppType";// Changed
- 
+import { FilterOption, DiscoverMovieOverviewProps } from "../types/movieAppType";
+
 const styles = {
   root: {
     padding: "20px",
   },
-   fab: {
+  fab: {
     marginTop: 8,
     position: "fixed",
     top: 2,
@@ -20,14 +20,14 @@ const styles = {
 };
 
 const MovieListPage = () => {
-  const [movies, setMovies] = useState<DiscoverMovieOverviewProps[]>([]); // Changed
+  const [movies, setMovies] = useState<DiscoverMovieOverviewProps[]>([]);
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const genreId = Number(genreFilter);
 
-const displayedMovies = movies
+  const displayedMovies = movies
     .filter((m: DiscoverMovieOverviewProps) => {
       return (m.title ?? "").toLowerCase().search(titleFilter.toLowerCase()) !== -1;
     })
@@ -36,9 +36,17 @@ const displayedMovies = movies
     });
 
   const handleChange = (type: FilterOption, value: string) => {
-      if (type === "title") setTitleFilter(value);
-      else setGenreFilter(value);
-    };
+    if (type === "title") setTitleFilter(value);
+    else setGenreFilter(value);
+  };
+
+  // The new function to handle adding to favourites
+  const addToFavourites = (movieId: number) => {
+    const updatedMovies = movies.map((m: DiscoverMovieOverviewProps) =>
+      m.id === movieId ? { ...m, favourite: true } : m
+    );
+    setMovies(updatedMovies);
+  };
 
   useEffect(() => {
     fetch(
@@ -46,31 +54,31 @@ const displayedMovies = movies
     )
       .then((res) => res.json())
       .then((json) => {
-        //console.log(json)
         return json.results;
       })
       .then((movies) => {
         setMovies(movies);
       });
   }, []);
-  
-return (
+
+  return (
     <>
       <Grid container sx={styles.root}>
         <Grid item xs={12}>
           <Header title={"Home Page"} />
         </Grid>
         <Grid item container spacing={5}>
-          <MovieList movies={displayedMovies}></MovieList>
+          {/* Updated to pass the selectFavourite function */}
+          <MovieList movies={displayedMovies} selectFavourite={addToFavourites} />
         </Grid>
       </Grid>
       <Fab
-          color="secondary"
-          variant="extended"
-          onClick={() => setDrawerOpen(true)}
-          sx={styles.fab}
-        >
-          Filter
+        color="secondary"
+        variant="extended"
+        onClick={() => setDrawerOpen(true)}
+        sx={styles.fab}
+      >
+        Filter
       </Fab>
       <Drawer
         anchor="left"
@@ -86,4 +94,5 @@ return (
     </>
   );
 };
+
 export default MovieListPage;
