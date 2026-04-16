@@ -11,6 +11,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { SelectChangeEvent } from "@mui/material";
 import { FilterOption } from "../types/movieAppTypes";
+import { getGenres } from "../api/tmdb-api";
 
 const styles = {
   root: {
@@ -27,36 +28,31 @@ const styles = {
 interface FilterMoviesCardProps {
   titleFilter: string;
   genreFilter: string;
+  onUserInput: (type: FilterOption, value: string) => void; // Added back to interface
 }
 
-const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }: FilterMoviesCardProps) => {
+const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
   const [genres, setGenres] = useState([{ id: '0', name: "All" }]);
 
+  // New useEffect using the API utility
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    )
-      .then(res => res.json())
-      .then(json => {
-        return json.genres;
-      })
-      .then(apiGenres => {
-        setGenres([genres[0], ...apiGenres]);
-      });
+    getGenres().then((allGenres) => {
+      setGenres([genres[0], ...allGenres]);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
-        e.preventDefault()
-        onUserInput(type, value)
-      };
+  const handleChange = (e: React.SyntheticEvent, type: FilterOption, value: string) => {
+    e.preventDefault();
+    onUserInput(type, value);
+  };
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChange(e, "title", e.target.value);
   };
 
   const handleGenreChange = (e: SelectChangeEvent) => {
-    handleChange(e, "genre", e.target.value);
+    handleChange(e, "genre", e.target.value as string);
   };
 
   return (

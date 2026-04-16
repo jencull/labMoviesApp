@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { MovieDetailsProps, MovieImage } from "../types/movieAppTypes";
+import { getMovie, getMovieImages } from "../api/tmdb-api"; // Ensure these are imported
 
 const styles = {
   imageListRoot: {
@@ -25,26 +26,17 @@ const MoviePage = () => {
   const [images, setImages] = useState<MovieImage[]>([]);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    )
-      .then((res) => res.json())
-      .then((movie) => {
-        setMovie(movie);
-      });
+    getMovie(id ?? "").then((movie) => {
+      setMovie(movie);
+    });
   }, [id]);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    )
-      .then((res) => res.json())
-      .then((json) => json.posters)
-      .then((images) => {
-        setImages(images);
-      });
+    getMovieImages(id ?? "").then((images) => {
+      setImages(images);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]); // Added [id] here so images refresh if the movie ID changes
+  }, [id]); // Changed from [] to [id] to ensure images refresh on navigation
 
   return (
     <>
