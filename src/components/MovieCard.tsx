@@ -12,6 +12,8 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import img from '../images/film-poster-placeholder.png';
 import { DiscoverMovieOverviewProps } from "../types/movieAppTypes";
+import { Link } from "react-router-dom";
+
 
 const styles = {
   card: { maxWidth: 345 },
@@ -22,7 +24,7 @@ const styles = {
 };
 
 const MovieCard = (movie: DiscoverMovieOverviewProps) => {
- 
+
 
   return (
     <Card sx={styles.card}>
@@ -55,11 +57,13 @@ const MovieCard = (movie: DiscoverMovieOverviewProps) => {
         <IconButton aria-label="add to favorites" >
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
-        <Button variant="outlined" size="medium" color="primary">
-          More Info ...
-        </Button>
-      </CardActions>
-    </Card>
+        <Link to={`/movies/${movie.id}`}>
+          <Button variant="outlined" size="medium" color="primary">
+            More Info ...
+          </Button>
+        </Link>
+    </CardActions>
+    </Card >
   );
 }
 
