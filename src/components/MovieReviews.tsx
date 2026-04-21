@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { getMovieReviews } from "../api/tmdb-api";
 import { excerpt } from "../util";
 
-import { MovieDetailsProps, Review } from "../types/movieAppTypes"; // Import the MovieT type from the appropriate location
+import { MovieDetailsProps, MovieReviewProps as Review } from "../types/movieAppTypes"; // Import the MovieT type from the appropriate location
 
 const styles = {
     table: {
@@ -44,7 +44,7 @@ const MovieReviews: React.FC<MovieDetailsProps> = (movie) => {
                             <TableCell component="th" scope="row">
                                 {r.author}
                             </TableCell>
-                            <TableCell >{excerpt(r.content)}</TableCell>
+                            <TableCell >{excerpt(r.content || "")}</TableCell>
                             <TableCell >
                                 <Link
                                     to={`/reviews/${r.id}`}
