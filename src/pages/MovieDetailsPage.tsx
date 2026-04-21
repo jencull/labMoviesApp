@@ -1,20 +1,11 @@
-import {useState, useEffect}  from "react"; // replace existing react import
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/MovieDetails";
-import { MovieDetailsProps} from "../types/movieAppTypes";
-import { getMovie} from "../api/tmdb-api";
+import useMovie from "../hooks/useMovie";
 import PageTemplate from "../components/TemplateMoviePage";
-
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState<MovieDetailsProps>();
-
-  useEffect(() => {
-    getMovie(id ?? "").then((movie) => {
-      setMovie(movie);
-    });
-  }, [id]);
+  const [movie] = useMovie(id ?? "");
 
   return (
     <>
