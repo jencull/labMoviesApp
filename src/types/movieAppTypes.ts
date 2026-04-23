@@ -47,6 +47,15 @@ export interface MovieListPageTemplateProps extends BaseMovieListProps {
   title: string;
 }
 
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface genreData {
+  genres: Genre[];
+}
+
 export type MovieReviewsProps = paths["/3/movie/{movie_id}/reviews"]["get"]["responses"][200]["content"]["application/json"];
 
 export type MovieReviewProps = NonNullable<MovieReviewsProps["results"]>[number];

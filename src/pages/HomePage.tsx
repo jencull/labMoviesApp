@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
 import PageTemplate from '../components/TemplateMovieListPage';
-import { MovieDetailsProps } from "../types/movieAppTypes";
+import {DiscoverMovieOverviewProps } from "../types/movieAppTypes";
 import { getMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/MovieFilterUI";
+import { useQuery } from "react-query";
+import Spinner from "../components/Spinner";
+
 
 const titleFiltering = {
   name: "title",
@@ -20,20 +22,19 @@ const genreFiltering = {
 };
 
 const HomePage = () => {
-  const [movies, setMovies] = useState<MovieDetailsProps[]>([]);
-  const favourites = movies.filter(m => m.favourite)
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovieOverviewProps[], Error>("discover", getMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
 
-  localStorage.setItem('favourites', JSON.stringify(favourites))
-  // New function
-  const addToFavourites = (movieId: number) => {
-    const updatedMovies = movies.map((m: MovieDetailsProps) =>
-      m.id === movieId ? { ...m, favourite: true } : m
-    );
-    setMovies(updatedMovies);
-  };
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
+
 
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
@@ -44,17 +45,18 @@ const HomePage = () => {
     setFilterValues(updatedFilterSet);
   };
 
-  useEffect(() => {
-    getMovies().then(movies => {
-      setMovies(movies);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const movies = data ? data : [];
   const displayedMovies = filterFunction(movies);
+
+  // Redundant, but necessary to avoid app crashing.
+  const favourites = movies.filter(m => m.favourite)
+  localStorage.setItem("favourites", JSON.stringify(favourites));
+  const addToFavourites = (movieId: number) => true;
+
   return (
     <>
       <PageTemplate
-        title='Discover Movies'
+        title="Discover Movies"
         movies={displayedMovies}
         selectFavourite={addToFavourites}
       />
