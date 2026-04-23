@@ -9,17 +9,14 @@ const styles = {
   }
 };
 
-const MovieListPageTemplate= ({ movies, title, selectFavourite }: MovieListPageTemplateProps)=> {
+const MovieListPageTemplate= ({ movies, title, action }: MovieListPageTemplateProps)=> {
   return (
     <Grid container sx={styles.root}>
       <Grid item xs={12}>
         <Header title={title} />
       </Grid>
       <Grid item container spacing={5}>
-        <MovieList
-          selectFavourite={selectFavourite}
-          movies={movies}
-        ></MovieList>
+        <MovieList action={action} movies={movies}></MovieList>
       </Grid>
     </Grid>
   );

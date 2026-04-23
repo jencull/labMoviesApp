@@ -8,6 +8,7 @@ import MovieFilterUI, {
 } from "../components/MovieFilterUI";
 import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
+import AddToFavouritesIcon from '../components/cardIcons/AddToFavourites'
 
 
 const titleFiltering = {
@@ -48,17 +49,14 @@ const HomePage = () => {
   const movies = data ? data : [];
   const displayedMovies = filterFunction(movies);
 
-  // Redundant, but necessary to avoid app crashing.
-  const favourites = movies.filter(m => m.favourite)
-  localStorage.setItem("favourites", JSON.stringify(favourites));
-  const addToFavourites = (movieId: number) => true;
-
   return (
-    <>
+<>
       <PageTemplate
         title="Discover Movies"
         movies={displayedMovies}
-        selectFavourite={addToFavourites}
+        action={(movie: BaseMovieProps) => {
+          return <AddToFavouritesIcon {...movie} />
+        }}
       />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}

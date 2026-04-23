@@ -9,6 +9,9 @@ import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/MovieFilterUI";
+import RemoveFromFavourites from "../components/cardIcons/RemoveFromFavourites";
+import WriteReview from "../components/cardIcons/WriteReview";
+
 
 const titleFiltering = {
   name: "title",
@@ -56,14 +59,19 @@ const FavouriteMoviesPage = () => {
     setFilterValues(updatedFilterSet);
   };
 
-  const toDo = () => true;
-
   return (
     <>
       <PageTemplate
         title="Favourite Movies"
         movies={displayedMovies}
-        selectFavourite={toDo}
+        action={(movie) => {
+          return (
+            <>
+              <RemoveFromFavourites {...movie} />
+              <WriteReview {...movie} />
+            </>
+          );
+        }}
       />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
