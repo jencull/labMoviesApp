@@ -2,8 +2,11 @@ import  {MouseEvent, useContext} from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {MovieDetailsProps} from "../../types/movieAppTypes";
-const AddToFavouritesIcon = (movie: MovieDetailsProps) => {
+import { MovieDetailsProps, DiscoverMovieOverviewProps } from "../../types/movieAppTypes";
+
+// added (movie: MovieDetailsProps | DiscoverMovieOverviewProps) so Upcoming page will work correctly
+// after added the cardIcons
+const AddToFavouritesIcon = (movie: MovieDetailsProps | DiscoverMovieOverviewProps) => {
   const context = useContext(MoviesContext);
 
   const onUserSelect = (e: MouseEvent<HTMLButtonElement>) => {
