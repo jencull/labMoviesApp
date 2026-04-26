@@ -11,10 +11,11 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar"; // New Import
+import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck"; // for must watch
 import img from '../images/film-poster-placeholder.png';
-import { DiscoverMovieOverviewProps } from "../types/movieAppTypes";
+import { MovieDetailsProps, DiscoverMovieOverviewProps } from "../types/movieAppTypes";
 import { Link } from "react-router-dom";
-import { MoviesContext } from "../contexts/moviesContext";
+import { MoviesContext } from "../contexts/moviesContext"
 
 const styles = {
   card: { maxWidth: 345 },
@@ -26,30 +27,34 @@ const styles = {
 
 interface MovieCardProps {
   movie: DiscoverMovieOverviewProps;
-  action: (m: MovieDetailsProps) => React.ReactNode;
+  action: (m: MovieDetailsProps | DiscoverMovieOverviewProps) => React.ReactNode;
 }
 
-const MovieCard = ({movie, action }: MovieCardProps) => {
-const { favourites } = useContext(MoviesContext);
+const MovieCard = ({ movie, action }: MovieCardProps) => {
+  const { favourites, mustWatch } = useContext(MoviesContext);
 
-const isFavourite = favourites.find((id) => id === movie.id)? true : false;//NEW
-
+  const isFavourite = favourites.find((id) => id === movie.id) ? true : false;//NEW
+  const isMustWatch = mustWatch.find((id) => id === movie.id) ? true : false;
 
   return (
-      <Card sx={styles.card}>
+    <Card sx={styles.card}>
       <CardHeader
         avatar={
           isFavourite ? (   //CHANGED
             <Avatar sx={styles.avatar}>
               <FavoriteIcon />
             </Avatar>
-          ) : null
+          ) : isMustWatch ? (
+      <Avatar sx={styles.avatar}>
+        <PlaylistAddCheckIcon />
+      </Avatar>
+      ): null
         }
-        title={
-          <Typography variant="h5" component="p">
-            {movie.title}{" "}
-          </Typography>
-        }
+      title={
+        <Typography variant="h5" component="p">
+          {movie.title}{" "}
+        </Typography>
+      }
       />
       <CardMedia
         sx={styles.media}

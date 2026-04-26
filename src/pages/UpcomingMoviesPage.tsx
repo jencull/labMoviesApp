@@ -3,7 +3,8 @@ import PageTemplate from '../components/TemplateMovieListPage';
 import { DiscoverMovieOverviewProps } from "../types/movieAppTypes";
 import { getUpcomingMovies } from "../api/tmdb-api";
 //import AddToFavouritesIcon from "../components/cardIcons/AddToFavourites";
-import AddToPlaylistIcon from "../components/cardIcons/PlaylistAdd"
+import MustWatchIcon from "../components/cardIcons/MustWatch";
+//import AddToPlaylistIcon from "../components/cardIcons/PlaylistAdd"
 import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
 
@@ -27,7 +28,7 @@ const UpcomingMoviesPage = () => {
       title='Upcoming Movies'
       movies={displayedMovies}
       action={(movie) => {
-        return <AddToPlaylistIcon {...movie} />
+        return <MustWatchIcon {...movie} />
       }}
     />
   );
