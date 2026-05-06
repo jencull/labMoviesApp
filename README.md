@@ -17,6 +17,10 @@
 
   * Movie reviews were being saved but there was no way to read them back/display them. Adding myReviews to the context value so any componenet can now access it. This is needed later when reviews get saved to dynamoDB.
 
+  ## PT-1-6
+
+  * Favourites were being tracked in two ways, the heart icon on the movie details page (local storage) but the heart icon on the cards was reading from MoviesContext. Potential to get out of sync so made changes to HeaderMovie.tsx so there is a single source of truth (MoviesContext) for favourites across the application.
+
 
 
 

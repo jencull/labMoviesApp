@@ -1,12 +1,13 @@
-import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
-import FavoriteIcon from "@mui/icons-material/Favorite"; // 1. Added Import
-import { MovieDetailsProps } from "../types/movieAppTypes"; 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { MovieDetailsProps } from "../types/movieAppTypes";
+import { useContext } from "react";
+import { MoviesContext } from "../contexts/moviesContext";
 
 const styles = {
     root: {  
@@ -19,8 +20,8 @@ const styles = {
 };
 
 const MovieHeader = (movie: MovieDetailsProps) => {
-  const favourites = JSON.parse(localStorage.getItem("favourites") || '[]');
-  const isFavourite = favourites.some((m: any) => m.id === movie.id);
+  const { favourites } = useContext(MoviesContext);
+  const isFavourite = favourites.includes(movie.id);
 
   return (
     <Paper component="div" sx={styles.root}>
