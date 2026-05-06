@@ -1418,3 +1418,36 @@ That commit pattern also satisfies the assignment's "clear commit messages" requ
 
 The one thing the manage tasks step would have added is a formal audit re-run after each tier to confirm the app still runs before moving forward. You can replicate that yourself by simply running `npm run dev` and doing a quick click-through after completing each parent task before moving to the next.
 
+## Work Plan. 
+
+**User**
+
+I have to upload this on 17th May and today is 6th May. I'd like to have the project completed on 16th May. Looking at the tasks and the work to be done, how much work should I do each day?
+
+**Cursor**
+
+Based on the task list and the 10 days available (May 6–16), here's a realistic daily plan. PT-0 is flagged as needing to happen early because the CDK deploy can take time and might need debugging.
+
+May 6 (today — Wed) ✅ PT-1-1, PT-1-2 (now done) Finish PT-1 remainder: PT-1-3 through PT-1-7 (nav stubs, myReviews, HeaderMovie, useMovie hook) ~1–2 hours
+
+May 7 (Thu) PT-2 first half: types, TMDB API functions for TV, TVCard component ~2 hours
+
+May 8 (Fri) PT-2 second half: TVSeriesPage, TVDetailsPage, routes, verify hyperlinking works ~2 hours
+
+May 9 (Sat) — weekend, more time available PT-3: Fantasy Movie Basic form, context extension, list page, routes ~3 hours
+
+May 10 (Sun) — weekend PT-0: Assignment 1 CORS fix + CDK deploy + curl verification. Do this now so you have a full week to debug if the deploy has problems. ~2 hours
+
+May 11 (Mon) PT-4 first half: AuthContext, app-api.ts, SignInPage, SignUpPage, ConfirmPage ~2–3 hours
+
+May 12 (Tue) PT-4 second half: PrivateRoute, wrap routes, SiteHeader sign in/out, .env.example PT-5: Pagination on Home page ~2–3 hours
+
+May 13 (Wed) PT-6: TV Favourites (context extension, card icons, FavouriteTVPage) PT-7: Multi-criteria Search form ~2–3 hours
+
+May 14 (Thu) PT-8: Review persistence (app-api.ts mutation, FavouriteMoviesPage display, end-to-end test) PT-9: Ordered Favourites (reorder controls + localStorage persistence) ~2–3 hours
+
+May 15 (Fri) PT-10: Themed Playlists PT-11: Fantasy Movie Advanced (cast list + poster upload) ~3 hours
+
+May 16 (Sat) — buffer day PT-12 if time allows (Outstanding tier — new Lambda endpoints) README final update, record YouTube video, AIUSAGE.md final update ~3 hours
+
+The critical path to watch: PT-0 on May 10 is the hinge point. If the CDK deploy fails or CORS doesn't work after deployment, you need the May 11–12 buffer to fix it before PT-4 auth work depends on it. Don't leave PT-0 until May 13.

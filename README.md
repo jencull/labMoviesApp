@@ -2,9 +2,9 @@
 
 ## PT-1-1 and PT-1-2: 
 
-  * Coded filer sort function with high to low and low to high because there were the exact same options available on the tv series endpoint and the pattern will be reusable. 
+  * Coded filter sort function with Rating - high to low and Rating- low to high using vote_average because there are the exact same options available on the tv series endpoint. the pattern will be reusable and consistent across the application. 
   
-  * Another option that can be used across both endpoints is most popular/least popular so I may use that when I get to TV series. 
+  * Another option that can be used across both endpoints is most popular/least popular (popularity), that is an option if additional/different filtering options desired/required. 
   
   * Considered release dates but the movie endpoint uses release_date and the tv series uses first_air_date. 
 
