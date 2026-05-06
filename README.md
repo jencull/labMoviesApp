@@ -21,6 +21,10 @@
 
   * Favourites were being tracked in two ways, the heart icon on the movie details page (local storage) but the heart icon on the cards was reading from MoviesContext. Potential to get out of sync so made changes to HeaderMovie.tsx so there is a single source of truth (MoviesContext) for favourites across the application.
 
+  ## PT-1-7
+
+  * removed the useMovie hook as no longer in use now that react query is in place. 
+
 
 
 
