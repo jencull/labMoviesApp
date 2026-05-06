@@ -45,7 +45,7 @@ export type MoviePageProps = {
   images: MovieImage[];
 }
 
-export type FilterOption = "title" | "genre";
+export type FilterOption = "title" | "genre" | "sort";
 
 export interface MovieListPageTemplateProps extends BaseMovieListProps {
   title: string;

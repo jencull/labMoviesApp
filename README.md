@@ -1,3 +1,15 @@
+# Assignment 2 - 20096634
+
+## PT-1-1 and PT-1-2: 
+
+  * Coded filer sort function with high to low and low to high because there were the exact same options available on the tv series endpoint and the pattern will be reusable. 
+  
+  * Another option that can be used across both endpoints is most popular/least popular so I may use that when I get to TV series. 
+  
+  * Considered release dates but the movie endpoint uses release_date and the tv series uses first_air_date. 
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

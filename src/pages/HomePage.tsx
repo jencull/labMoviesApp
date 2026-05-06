@@ -1,5 +1,5 @@
 import PageTemplate from '../components/TemplateMovieListPage';
-import {DiscoverMovieOverviewProps } from "../types/movieAppTypes";
+import { DiscoverMovieOverviewProps } from "../types/movieAppTypes";
 import { getMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
@@ -8,7 +8,8 @@ import MovieFilterUI, {
 } from "../components/MovieFilterUI";
 import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
-import AddToFavouritesIcon from '../components/cardIcons/AddToFavourites'
+import AddToFavouritesIcon from '../components/cardIcons/AddToFavourites';
+import { useState } from "react";
 
 
 const titleFiltering = {
@@ -27,6 +28,7 @@ const HomePage = () => {
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
+  const [sortOption, setSortOption] = useState("none");
 
   if (isLoading) {
     return <Spinner />;
@@ -38,6 +40,10 @@ const HomePage = () => {
 
 
   const changeFilterValues = (type: string, value: string) => {
+    if (type === "sort") {
+      setSortOption(value);
+      return;
+    }
     const changedFilter = { name: type, value: value };
     const updatedFilterSet =
       type === "title"
@@ -47,14 +53,19 @@ const HomePage = () => {
   };
 
   const movies = data ? data : [];
-  const displayedMovies = filterFunction(movies);
+  const filteredMovies = filterFunction(movies);
+  const displayedMovies = [...filteredMovies].sort((a, b) => {
+    if (sortOption === "high-low") return (b.vote_average ?? 0) - (a.vote_average ?? 0);
+    if (sortOption === "low-high") return (a.vote_average ?? 0) - (b.vote_average ?? 0);
+    return 0;
+  });
 
   return (
-<>
+    <>
       <PageTemplate
         title="Discover Movies"
         movies={displayedMovies}
-        action={(movie: BaseMovieProps) => {
+        action={(movie: DiscoverMovieOverviewProps) => {
           return <AddToFavouritesIcon {...movie} />
         }}
       />
@@ -62,6 +73,7 @@ const HomePage = () => {
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        sortOption={sortOption}
       />
     </>
   );

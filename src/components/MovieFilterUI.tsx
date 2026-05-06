@@ -30,13 +30,14 @@ const styles = {
     },
 };
 
-type  MovieFilterUIProps = {
+type MovieFilterUIProps = {
     onFilterValuesChange: (f: string, s: string) => void;
     titleFilter: string;
     genreFilter: string;
+    sortOption?: string;
 }
 
-const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter }: MovieFilterUIProps) => {
+const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter, sortOption = "none" }: MovieFilterUIProps) => {
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     return (
@@ -58,6 +59,7 @@ const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter }: Movie
                     onUserInput={onFilterValuesChange}
                     titleFilter={titleFilter}
                     genreFilter={genreFilter}
+                    sortOption={sortOption}
                 />
             </Drawer>
         </>

@@ -30,10 +30,17 @@ const styles = {
 interface FilterMoviesCardProps {
   titleFilter: string;
   genreFilter: string;
-  onUserInput: (type: FilterOption, value: string) => void; // Added back to interface
+  sortOption: string;
+  onUserInput: (type: FilterOption, value: string) => void;
 }
 
-const FilterMoviesCard= ({ titleFilter, genreFilter, onUserInput }: FilterMoviesCardProps) => { //add onUserInput to destructured props 
+const sortOptions = [
+  { value: "none", label: "None" },
+  { value: "high-low", label: "Rating (high to low)" },
+  { value: "low-high", label: "Rating (low to high)" },
+];
+
+const FilterMoviesCard = ({ titleFilter, genreFilter, sortOption, onUserInput }: FilterMoviesCardProps) => {
  const { data, error, isLoading, isError } = useQuery<genreData, Error>("genres", getGenres);
 
   if (isLoading) {
@@ -58,6 +65,10 @@ const FilterMoviesCard= ({ titleFilter, genreFilter, onUserInput }: FilterMovies
 
   const handleGenreChange = (e: SelectChangeEvent) => {
     handleChange(e, "genre", e.target.value)
+  };
+
+  const handleSortChange = (e: SelectChangeEvent) => {
+    handleChange(e, "sort", e.target.value)
   };
 
   return (
@@ -102,6 +113,21 @@ const FilterMoviesCard= ({ titleFilter, genreFilter, onUserInput }: FilterMovies
             <SortIcon fontSize="large" />
             Sort the movies.
           </Typography>
+          <FormControl sx={styles.formControl}>
+            <InputLabel id="sort-label">Sort by</InputLabel>
+            <Select
+              labelId="sort-label"
+              id="sort-select"
+              value={sortOption}
+              onChange={handleSortChange}
+            >
+              {sortOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </CardContent>
       </Card>
     </>
