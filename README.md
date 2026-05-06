@@ -13,7 +13,13 @@
   * replace Option 3 and Option 4 headings on Siteheader with
   TV Series and Fantasy Movies. 
 
-  
+  ## PT-1-5
+
+  * Movie reviews were being saved but there was no way to read them back/display them. Adding myReviews to the context value so any componenet can now access it. This is needed later when reviews get saved to dynamoDB.
+
+
+
+
 
 
 
