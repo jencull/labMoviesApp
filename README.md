@@ -8,6 +8,13 @@
   
   * Considered release dates but the movie endpoint uses release_date and the tv series uses first_air_date. 
 
+  ## PT-1-3 and PT-1-4
+
+  * replace Option 3 and Option 4 headings on Siteheader with
+  TV Series and Fantasy Movies. 
+
+  
+
 
 
 # React + TypeScript + Vite
