@@ -49,6 +49,11 @@
 
   * added TVSeriesPage.tsx
   * useFiltering hook accidentally deleted in PT-1-7 when deleting useMovie hook. Reinstated. 
+  * TV Series route added, not due to be added until PT-2-7 but current work wasn't able to be verified with npm run dev without the route in place.
+
+  ## PT-2-5
+
+  
 
 
 
