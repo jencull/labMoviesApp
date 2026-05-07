@@ -27,13 +27,30 @@
 
   ## PT-2-1
 
-  Tv filtering options https://developer.themoviedb.org/reference/discover-tv
+  * Tv filtering options https://developer.themoviedb.org/reference/discover-tv
 
-  Tv series details https://developer.themoviedb.org/reference/tv-series-details
+  * Tv series details https://developer.themoviedb.org/reference/tv-series-details
 
-  TV series images https://developer.themoviedb.org/reference/tv-series-images
+  * TV series images https://developer.themoviedb.org/reference/tv-series-images
 
-  
+  ## PT-2-2
+
+  * added API
+
+  ## PT-2-3
+
+  * added TVCard.tsx. Some minor differences from MovieCard.tsx:
+    * uses tvSeries.name (instead of movie.title)
+    * uses tvSeries.first_air_date (instead of movie.release_date)
+    * links to /tv/:id (instead of /movies/:id)
+    * no favourites yet
+
+  ## PT-2-4
+
+  * added TVSeriesPage.tsx
+  * useFiltering hook accidentally deleted in PT-1-7 when deleting useMovie hook. Reinstated. 
+
+
 
 
 
