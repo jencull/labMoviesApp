@@ -23,7 +23,17 @@
 
   ## PT-1-7
 
-  * removed the useMovie hook as no longer in use now that react query is in place. 
+  * removed the useMovie hook as no longer in use now that react query caching is in place. 
+
+  ## PT-2-1
+
+  Tv filtering options https://developer.themoviedb.org/reference/discover-tv
+
+  Tv series details https://developer.themoviedb.org/reference/tv-series-details
+
+  TV series images https://developer.themoviedb.org/reference/tv-series-images
+
+  
 
 
 

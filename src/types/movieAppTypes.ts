@@ -70,3 +70,26 @@ export interface Review {
 export type MovieReviewsProps = paths["/3/movie/{movie_id}/reviews"]["get"]["responses"][200]["content"]["application/json"];
 
 export type MovieReviewProps = NonNullable<MovieReviewsProps["results"]>[number];
+
+export interface TVSeriesOverview {
+  id: number;
+  name: string;
+  first_air_date: string;
+  overview: string;
+  poster_path: string;
+  genre_ids: number[];
+  vote_average: number;
+  backdrop_path: string;
+}
+
+export interface TVSeriesDetails {
+  id: number;
+  name: string;
+  first_air_date: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  genres: Genre[];
+  vote_average: number;
+  number_of_seasons: number;
+}
