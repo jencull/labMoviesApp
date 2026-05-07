@@ -53,6 +53,14 @@
 
   ## PT-2-5
 
+  * TVDetails component added.
+
+  ## PT-2-6
+
+  * Added TVDetailsPage (page), TemplateTVPage and HeaderTV (components)
+
+  ## PT-2-7
+
   
 
 
