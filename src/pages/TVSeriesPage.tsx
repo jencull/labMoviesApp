@@ -2,13 +2,13 @@ import PageTemplate from "../components/TemplateTVListPage";
 import { TVSeriesOverview } from "../types/movieAppTypes";
 import { getTVSeries } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
-import MovieFilterUI from "../components/MovieFilterUI";
+import TVSeriesFilterUI, {
+  nameFilter,
+  genreFilter,
+} from "../components/TVSeriesFilterUI";
 import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
-
-const nameFilter = (tvSeries: TVSeriesOverview, value: string): boolean => {
-  return tvSeries.name.toLowerCase().search(value.toLowerCase()) !== -1;
-};
+import { useState } from "react";
 
 const nameFiltering = {
   name: "title",
@@ -16,12 +16,21 @@ const nameFiltering = {
   condition: nameFilter,
 };
 
+const genreFiltering = {
+  name: "genre",
+  value: "0",
+  condition: genreFilter,
+};
+
 const TVSeriesPage = () => {
   const { data, error, isLoading, isError } = useQuery<TVSeriesOverview[], Error>(
     "tvSeries",
     getTVSeries
   );
-  const { filterValues, setFilterValues, filterFunction } = useFiltering([nameFiltering]);
+  const { filterValues, setFilterValues, filterFunction } = useFiltering(
+    [nameFiltering, genreFiltering]
+  );
+  const [sortOption, setSortOption] = useState("none");
 
   if (isLoading) {
     return <Spinner />;
@@ -32,12 +41,25 @@ const TVSeriesPage = () => {
   }
 
   const changeFilterValues = (type: string, value: string) => {
+    if (type === "sort") {
+      setSortOption(value);
+      return;
+    }
     const changedFilter = { name: type, value: value };
-    setFilterValues([changedFilter]);
+    const updatedFilterSet =
+      type === "title"
+        ? [changedFilter, filterValues[1]]
+        : [filterValues[0], changedFilter];
+    setFilterValues(updatedFilterSet);
   };
 
   const tvSeries = data ? data : [];
-  const displayedSeries = filterFunction(tvSeries);
+  const filteredSeries = filterFunction(tvSeries);
+  const displayedSeries = [...filteredSeries].sort((a: TVSeriesOverview, b: TVSeriesOverview) => {
+    if (sortOption === "high-low") return (b.vote_average ?? 0) - (a.vote_average ?? 0);
+    if (sortOption === "low-high") return (a.vote_average ?? 0) - (b.vote_average ?? 0);
+    return 0;
+  });
 
   return (
     <>
@@ -48,10 +70,11 @@ const TVSeriesPage = () => {
           return <></>;
         }}
       />
-      <MovieFilterUI
+      <TVSeriesFilterUI
         onFilterValuesChange={changeFilterValues}
-        titleFilter={filterValues[0].value}
-        genreFilter=""
+        nameFilter={filterValues[0].value}
+        genreFilter={filterValues[1].value}
+        sortOption={sortOption}
       />
     </>
   );

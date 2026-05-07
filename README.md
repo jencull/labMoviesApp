@@ -61,6 +61,26 @@
 
   ## PT-2-7
 
+  * Added tv details route. 
+
+  ## PT-2-8
+
+  This task was to verify that everything worked as intended.
+  
+  However, the filter on the TV Series page was showing 'Filter the Movies' and 'Sort the Movies' because it was reusing the MovieFilterUI component.
+  
+  To resolve this issue a new FilterTVSeriesCard.tsx and TVSeriesFilterUI components were created as TV versions of the movie filtering. 
+
+  This issue was not covered in the task list because it wasn't specifically mentioned on the assignment spec and only became visible when testing in the browser window. 
+
+  Takeaway: A task can't be generated for something the agent hasn't been informed of. But that spec was generated from within the project folder so the information (code) was available and it could have been asked as a clarifying question. 
+  
+  There were no clarifying questions asked at the time the SDD work was being done. (see prompt-enhancement-and-planning.md)
+
+  Another issue to highlight here is that the final task was to add routes and see that everything worked. This student prefers to check more frequently. The TV Series route was added in PT-2-4, just to confirm functionality at that point in time. 
+
+
+
   
 
 
