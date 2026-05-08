@@ -66,6 +66,8 @@
   ## PT-2-8
 
   This task was to verify that everything worked as intended.
+
+  ### Unexpected/unplanned work PT-2
   
   However, the filter on the TV Series page was showing 'Filter the Movies' and 'Sort the Movies' because it was reusing the MovieFilterUI component.
   
@@ -89,11 +91,25 @@
 
   ## PT-3-3
 
-  * create fantasy movie form
+  * create fantasy movie form. Not committed until 3-5 completed in order to check the form in the browser, similar to PT-2-8
 
   ## PT-3-4
 
 * added FanatasyMovieCreatePage and route. Able to view the form on http://localhost:3000/fantasy-movie/create 
+
+## PT-3-5 & PT-3-6
+
+* Commited together in order to view the Fantasy Movie page and ensure it looks/works correctly
+* Initially there was no way to link from the page to the form to create a movie. This wasn't listed as a task in the generated task list. The page only contained the text "My Fantasy Movies. No fantasy movies yet. Create one!"
+* Created a button, similar to the one on reviewForm with the text "Create Fantasy Movie" and linked it to the form. 
+
+### Unexpected/unplanned work in PT-3
+
+* Another gap here, in this students opinion, is the lack of caching/storage on the page. It wasn't listed any of the tasks and persisting to AWS is in the 90+ range. Local storage for ordered movies comes in PT-9 but no mention of it for Fantasy Movies. 
+* Created local storage for created fantasy movies, completed in this commit using this tutorial
+https://felixgerschau.com/react-localstorage/
+
+
 
 
 

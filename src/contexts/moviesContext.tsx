@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review, FantasyMovie } from "../types/movieAppTypes";
 
 // (movie: MovieDetailsProps | DiscoverMovieOverviewProps) added to types and callbacks fix white screen on discover page
@@ -36,7 +36,9 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [myReviews, setMyReviews] = useState<any>( {} ); // Lab uses {} logic
     const [mustWatch, setMustWatch] = useState<number[]>([]);
-    const [fantasyMovies, setFantasyMovies] = useState<FantasyMovie[]>([]);
+    const [fantasyMovies, setFantasyMovies] = useState<FantasyMovie[]>(
+        JSON.parse(localStorage.getItem("fantasyMovies") ?? "[]")
+    );  // https://felixgerschau.com/react-localstorage/ 
 
     const addToFavourites = useCallback((movie: MovieDetailsProps | DiscoverMovieOverviewProps) => {
         setFavourites((prevFavourites) => {
@@ -67,6 +69,11 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
     const removeFromMustWatch = useCallback((movie: MovieDetailsProps | DiscoverMovieOverviewProps) => {
         setMustWatch((prevMustWatch) => prevMustWatch.filter((mId) => mId !== movie.id));
     }, []);
+
+    // https://felixgerschau.com/react-localstorage/ 
+    useEffect(() => {
+        localStorage.setItem("fantasyMovies", JSON.stringify(fantasyMovies));
+    }, [fantasyMovies]);
 
     const addFantasyMovie = useCallback((movie: FantasyMovie) => {
         setFantasyMovies((prev) => [...prev, movie]);
