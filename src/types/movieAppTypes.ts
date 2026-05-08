@@ -93,3 +93,13 @@ export interface TVSeriesDetails {
   vote_average: number;
   number_of_seasons: number;
 }
+
+export interface FantasyMovie {
+  id: string;
+  title: string;
+  overview: string;
+  genres: string[];
+  releaseDate: string;
+  runtime: number;
+  productionCompanies: string[];
+}
