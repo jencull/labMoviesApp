@@ -85,7 +85,19 @@
 
   ## PT-3-2
 
-  
+  * Expland moviesContext to allow for fantasy movies
+
+  ## PT-3-3
+
+  * create fantasy movie form
+
+  ## PT-3-4
+
+* added FanatasyMovieCreatePage and route. Able to view the form on http://localhost:3000/fantasy-movie/create 
+
+
+
+
 
 
 
