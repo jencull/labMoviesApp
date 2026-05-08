@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review } from "../types/movieAppTypes";
+import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review, FantasyMovie } from "../types/movieAppTypes";
 
 // (movie: MovieDetailsProps | DiscoverMovieOverviewProps) added to types and callbacks fix white screen on discover page
 // after lab 4
@@ -13,6 +13,8 @@ type MovieContextInterface = {
     mustWatch: number[];
     addToMustWatch: (movie: MovieDetailsProps | DiscoverMovieOverviewProps) => void;
     removeFromMustWatch: (movie: MovieDetailsProps | DiscoverMovieOverviewProps) => void;
+    fantasyMovies: FantasyMovie[];
+    addFantasyMovie: (movie: FantasyMovie) => void;
 }
 
 const initialContextState: MovieContextInterface = {
@@ -24,6 +26,8 @@ const initialContextState: MovieContextInterface = {
     mustWatch: [],
     addToMustWatch: () => {},
     removeFromMustWatch: () => {},
+    fantasyMovies: [],
+    addFantasyMovie: () => {},
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
@@ -32,6 +36,7 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [myReviews, setMyReviews] = useState<any>( {} ); // Lab uses {} logic
     const [mustWatch, setMustWatch] = useState<number[]>([]);
+    const [fantasyMovies, setFantasyMovies] = useState<FantasyMovie[]>([]);
 
     const addToFavourites = useCallback((movie: MovieDetailsProps | DiscoverMovieOverviewProps) => {
         setFavourites((prevFavourites) => {
@@ -63,6 +68,10 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
         setMustWatch((prevMustWatch) => prevMustWatch.filter((mId) => mId !== movie.id));
     }, []);
 
+    const addFantasyMovie = useCallback((movie: FantasyMovie) => {
+        setFantasyMovies((prev) => [...prev, movie]);
+    }, []);
+
     return (
         <MoviesContext.Provider
             value={{
@@ -74,6 +83,8 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
                 mustWatch,
                 addToMustWatch,
                 removeFromMustWatch,
+                fantasyMovies,
+                addFantasyMovie,
             }}
         >
             {children}

@@ -79,6 +79,14 @@
 
   Another issue to highlight here is that the final task was to add routes and see that everything worked. This student prefers to check more frequently. The TV Series route was added in PT-2-4, just to confirm functionality at that point in time. 
 
+  ## PT-3-1
+
+  * Add fantasy movie type
+
+  ## PT-3-2
+
+  
+
 
 
   
