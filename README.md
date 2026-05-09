@@ -142,6 +142,12 @@ PT-0
 * Add signup route. 
 * Register button on signin page now directs to signup page. 
 
+## PT-4-6
+
+* New page for confirm signup. The user gets a code from AWS and will enter the code here to verify the registration.
+* Username is prefilled using location.state, used addMovieReviewPage as a guide for this.
+* Success directs to /signin. 
+* Add route for ConfirmSignUpPage
 
 
 
