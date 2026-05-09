@@ -149,6 +149,13 @@ PT-0
 * Success directs to /signin. 
 * Add route for ConfirmSignUpPage
 
+## PT-4-7 & PT-4-8
+
+* Created PrivateRoute component. Calls isAuthenticated from AuthContext so if a user tries to access content but is not logged in it redirects to signin page.
+* https://stackoverflow.com/questions/69923420/how-to-use-private-route-in-react-router-domv6
+* Wrap protected routes in index.tsx (4-8)
+
+
 
 
 

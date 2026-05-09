@@ -18,6 +18,7 @@ import FantasyMoviePage from './pages/FantasyMoviePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import ConfirmSignUpPage from './pages/ConfirmSignUpPage';
+import PrivateRoute from './components/PrivateRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,16 +39,18 @@ const App = () => {
      <SiteHeader />
      <MoviesContextProvider>
       <Routes>
-        <Route path="/movies/favourites" element={<FavouriteMoviesPage />} />
+        <Route path="/movies/favourites" element={<PrivateRoute><FavouriteMoviesPage /></PrivateRoute>} />
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/tv" element={<TVSeriesPage />} />
         <Route path="/tv/:id" element={<TVDetailsPage />} />
+        <Route path="/tv/favourites" element={<PrivateRoute><Navigate to="/" /></PrivateRoute>} />
         <Route path="/reviews/:id" element={<MovieReviewPage/>} />
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
         <Route path="/fantasy-movie" element={<FantasyMoviePage />} />
-        <Route path="/fantasy-movie/create" element={<FantasyMovieCreatePage />} />
+        <Route path="/fantasy-movie/create" element={<PrivateRoute><FantasyMovieCreatePage /></PrivateRoute>} />
+        <Route path="/playlists/create" element={<PrivateRoute><Navigate to="/" /></PrivateRoute>} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/confirm" element={<ConfirmSignUpPage />} />
