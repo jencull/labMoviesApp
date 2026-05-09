@@ -121,6 +121,13 @@ PT-0
 
 * Import AuthContext to index and wrap the app with it, then all pages/components have access
 
+## PT-4-3
+
+* Created an app-api file using tmdb-api as a guide. 
+* Addded a getAuthHeader helper that checks localStorage for the token and adds it to requests to our backend
+* 3 new functions, addReview, getMovieReviewsFromAPI and updateReview use the above to make authenticated requests to Assign1 API (in the .env file), where the reviews are/will be stored
+* Confirmed connection via curl command with AI assistance, see verify-backend-connection.md
+
 
 
 
