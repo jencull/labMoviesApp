@@ -155,6 +155,16 @@ PT-0
 * https://stackoverflow.com/questions/69923420/how-to-use-private-route-in-react-router-domv6
 * Wrap protected routes in index.tsx (4-8)
 
+## PT-4-9
+
+* Show/hide buttons on site header depending on if a user is logged in or not. Has to be added to normal header and responsive (mobile) header. Conditional rendering: https://react.dev/learn/conditional-rendering
+* When logged in the username will be visible and a signout option available.
+* When logged out the sign in option will show.
+* Signout calls the signout endpoint and deletes the stored token
+
+## PT-4-10 & PT-4-11
+
+* Routes & .env.example : both completed during earlier steps in order to view pages as they were build and explain .env security matters. 
 
 
 

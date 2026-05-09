@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useContext, useState, MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { AuthContext } from "../contexts/AuthContext";
 
 const styles = {
     title: {
@@ -26,6 +27,7 @@ const SiteHeader = () => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const { isAuthenticated, username, signOut } = useContext(AuthContext);
 
   const menuOptions = [
     { label: "Home", path: "/" },
@@ -42,6 +44,17 @@ const SiteHeader = () => {
 
   const handleMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await fetch(`${import.meta.env.VITE_AUTH_API}/auth/signout`, {
+        method: "GET",
+      });
+    } catch {
+    }
+    signOut();
+    navigate("/");
   };
 
   return (
@@ -89,6 +102,11 @@ const SiteHeader = () => {
                     {opt.label}
                   </MenuItem>
                 ))}
+                {isAuthenticated ? (
+                  <MenuItem onClick={handleSignOut}>Sign Out ({username})</MenuItem>
+                ) : (
+                  <MenuItem onClick={() => navigate("/signin")}>Sign In</MenuItem>
+                )}
               </Menu>
             </>
           ) : (
@@ -102,6 +120,20 @@ const SiteHeader = () => {
                   {opt.label}
                 </Button>
               ))}
+              {isAuthenticated ? (
+                <>
+                  <Typography variant="body1" sx={{ mx: 1 }}>
+                    {username}
+                  </Typography>
+                  <Button color="inherit" onClick={handleSignOut}>
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <Button color="inherit" onClick={() => navigate("/signin")}>
+                  Sign In
+                </Button>
+              )}
             </>
           )}
         </Toolbar>
