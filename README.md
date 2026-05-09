@@ -132,7 +132,17 @@ PT-0
 
 * Using the reviewForm/index as a guide, implemented the sign in page. 
 * on signin it posts to the auth/signin endpoint, if successful stores the token in AuthContext and redirects to home
-* register button goes nowhere yet because the signup route doesn't exist, will build a signup page in next section
+* register button goes nowhere yet because the signup route doesn't exist, will build a signup page in next section"
+
+## PT-4-5
+
+* Similar to signin page but with 3 fields, username, pw and email
+* Pw validation set with min 8 chars with uppercase, lowecase and a symbol required (like 'rules' in reviewForm). Cognito enforces this on the backend. 
+* Success directs to /confirm (next section), passing username in location.state. No AuthContext needed here. 
+* Add signup route. 
+* Register button on signin page now directs to signup page. 
+
+
 
 
 
