@@ -113,6 +113,10 @@ PT-0
 
 * Backend integration done to allow movie reviews be stored on aws. Sample file,  .env.sample, is provided to show how this is hooked up with the App and auth endpoints from aws and the vite key. The .env file will not be pushed to github for security reasons. 
 
+## PT-4-1
+
+* Add AuthContext for sign in, sign out and storing token
+
 
 
 
