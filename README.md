@@ -128,7 +128,11 @@ PT-0
 * 3 new functions, addReview, getMovieReviewsFromAPI and updateReview use the above to make authenticated requests to Assign1 API (in the .env file), where the reviews are/will be stored
 * Confirmed connection via curl command with AI assistance, see verify-backend-connection.md
 
+## PT-4-4
 
+* Using the reviewForm/index as a guide, implemented the sign in page. 
+* on signin it posts to the auth/signin endpoint, if successful stores the token in AuthContext and redirects to home
+* register button goes nowhere yet because the signup route doesn't exist, will build a signup page in next section
 
 
 
