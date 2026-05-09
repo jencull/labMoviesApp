@@ -117,7 +117,9 @@ PT-0
 
 * Add AuthContext for sign in, sign out and storing token
 
+## PT-4-2
 
+* Import AuthContext to index and wrap the app with it, then all pages/components have access
 
 
 

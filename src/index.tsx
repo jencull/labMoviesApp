@@ -9,6 +9,7 @@ import UpcomingMoviesPage from './pages/UpcomingMoviesPage';
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import MoviesContextProvider from "./contexts/moviesContext";
+import AuthContextProvider from "./contexts/AuthContext";
 import AddMovieReviewPage from './pages/AddMovieReviewPage';
 import TVSeriesPage from './pages/TVSeriesPage';
 import TVDetailsPage from './pages/TVDetailsPage';
@@ -30,6 +31,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
      <BrowserRouter>
+     <AuthContextProvider>
      <SiteHeader />
      <MoviesContextProvider>
       <Routes>
@@ -46,6 +48,7 @@ const App = () => {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       </MoviesContextProvider>
+      </AuthContextProvider>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
