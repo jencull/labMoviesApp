@@ -39,11 +39,11 @@ const App = () => {
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/tv" element={<TVSeriesPage />} />
         <Route path="/tv/:id" element={<TVDetailsPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
         <Route path="/reviews/:id" element={<MovieReviewPage/>} />
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
         <Route path="/fantasy-movie" element={<FantasyMoviePage />} />
         <Route path="/fantasy-movie/create" element={<FantasyMovieCreatePage />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       </MoviesContextProvider>
     </BrowserRouter>

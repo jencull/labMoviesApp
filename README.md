@@ -109,6 +109,12 @@
 * Created local storage for created fantasy movies, completed in this commit using this tutorial
 https://felixgerschau.com/react-localstorage/
 
+PT-0
+
+* Backend integration done to allow movie reviews be stored on aws. Sample file,  .env.sample, is provided to show how this is hooked up with the App and auth endpoints from aws and the vite key. The .env file will not be pushed to github for security reasons. 
+
+
+
 
 
 
