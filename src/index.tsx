@@ -13,6 +13,7 @@ import AuthContextProvider from "./contexts/AuthContext";
 import AddMovieReviewPage from './pages/AddMovieReviewPage';
 import TVSeriesPage from './pages/TVSeriesPage';
 import TVDetailsPage from './pages/TVDetailsPage';
+import FavouriteTVPage from './pages/FavouriteTVPage';
 import FantasyMovieCreatePage from './pages/FantasyMovieCreatePage';
 import FantasyMoviePage from './pages/FantasyMoviePage';
 import SignInPage from './pages/SignInPage';
@@ -44,8 +45,8 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/tv" element={<TVSeriesPage />} />
+        <Route path="/tv/favourites" element={<PrivateRoute><FavouriteTVPage /></PrivateRoute>} />
         <Route path="/tv/:id" element={<TVDetailsPage />} />
-        <Route path="/tv/favourites" element={<PrivateRoute><Navigate to="/" /></PrivateRoute>} />
         <Route path="/reviews/:id" element={<MovieReviewPage/>} />
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
         <Route path="/fantasy-movie" element={<FantasyMoviePage />} />

@@ -209,7 +209,21 @@ PT-0
 * Created getTVSeriesByID to tmdb-api to return TVSeriesOveriew. This was needed because getTVSeriesDetails already exists but returns the full details with genres etc (TVSeriesDetails) which doesn't match what the TV card expects. * Same problem arose with MovieDetailsProps and DiscoverMovieOverviewProps. In that case a union was used (MovieDetailsProps | DiscoverMovieOverProps) so that both could be accepted. The same option was available here but I chose to use a new function to see if its any benefit to the app or not. 
 
 
+## PT-6-6
 
+* Add route for tv/favourites
+
+### Testing before commiting PT-6-6 showed the following issues: 
+
+* Register/confirm not redirecting, need to revisit Part 0. Register does actually work, got the code. Had to use the browser url bar to get to confirm page. Sign in working also. 
+
+* Heart not showing on top of TV card, fixed.
+
+* TV Favourites - forgot to add link to site header
+
+* Error in ordering with tv/:id being listed before /tv/favourites in index
+
+* Changed Favourites to Movie Favourites for user clarity
 
 
   
