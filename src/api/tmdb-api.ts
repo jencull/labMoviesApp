@@ -56,6 +56,12 @@ export const getTVSeries = () => {
     .then(json => json.results);
 };
 
+export const getTVSeriesById = (id: number): Promise<import("../types/movieAppTypes").TVSeriesOverview> => {
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  ).then(res => res.json());
+};
+
 export const getTVSeriesDetails = (id: string | number) => {
   return fetch(
     `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`

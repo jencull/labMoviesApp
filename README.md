@@ -203,6 +203,10 @@ PT-0
 
 * Connected AddTVToFavouritesIcon to TVSeriesPage, heart icon now appears on every TV card
 
+## PT-6-5
+
+* Created FavouriteTVPage using FavouriteMoviesPage as a guide. 
+* Created getTVSeriesByID to tmdb-api to return TVSeriesOveriew. This was needed because getTVSeriesDetails already exists but returns the full details with genres etc (TVSeriesDetails) which doesn't match what the TV card expects. * Same problem arose with MovieDetailsProps and DiscoverMovieOverviewProps. In that case a union was used (MovieDetailsProps | DiscoverMovieOverProps) so that both could be accepted. The same option was available here but I chose to use a new function to see if its any benefit to the app or not. 
 
 
 
