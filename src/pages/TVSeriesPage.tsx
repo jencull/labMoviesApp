@@ -9,6 +9,7 @@ import TVSeriesFilterUI, {
 import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
 import { useState } from "react";
+import AddTVToFavouritesIcon from "../components/cardIcons/AddTVToFavourites";
 
 const nameFiltering = {
   name: "title",
@@ -66,8 +67,8 @@ const TVSeriesPage = () => {
       <PageTemplate
         title="Discover TV Series"
         tvSeries={displayedSeries}
-        action={(_tv: TVSeriesOverview) => {
-          return <></>;
+        action={(tv: TVSeriesOverview) => {
+          return <AddTVToFavouritesIcon {...tv} />;
         }}
       />
       <TVSeriesFilterUI

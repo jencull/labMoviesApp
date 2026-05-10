@@ -199,6 +199,10 @@ PT-0
 
 * Created RemoveTVFromFavourites cardIcon using RemoveFromFavourites as a template
 
+## PT-6-4
+
+* Connected AddTVToFavouritesIcon to TVSeriesPage, heart icon now appears on every TV card
+
 
 
 
