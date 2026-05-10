@@ -1,5 +1,5 @@
 import PageTemplate from '../components/TemplateMovieListPage';
-import { DiscoverMovieOverviewProps } from "../types/movieAppTypes";
+import { DiscoverMovieOverviewProps, PaginatedMovieResults } from "../types/movieAppTypes";
 import { getMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
@@ -24,7 +24,7 @@ const genreFiltering = {
 };
 
 const HomePage = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovieOverviewProps[], Error>("discover", getMovies);
+  const { data, error, isLoading, isError } = useQuery<PaginatedMovieResults, Error>("discover", getMovies);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
@@ -52,7 +52,7 @@ const HomePage = () => {
     setFilterValues(updatedFilterSet);
   };
 
-  const movies = data ? data : [];
+  const movies = data ? data.results : [];
   const filteredMovies = filterFunction(movies);
   const displayedMovies = [...filteredMovies].sort((a, b) => {
     if (sortOption === "high-low") return (b.vote_average ?? 0) - (a.vote_average ?? 0);

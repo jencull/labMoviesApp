@@ -170,6 +170,10 @@ PT-0
 
 * Updated getMovies in tmdb-api to accept page param to enable pagination
 
+## PT-5-2
+
+* Added new type PaginatedMovieResults to movieAppTypes to handle pagination. Chose a new type rather than editing DiscoverMoviesProps to keep other functionality working as before.
+
 
 
 

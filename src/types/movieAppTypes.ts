@@ -94,6 +94,11 @@ export interface TVSeriesDetails {
   number_of_seasons: number;
 }
 
+export type PaginatedMovieResults = {
+  results: DiscoverMovieOverviewProps[];
+  total_pages: number;
+};
+
 export interface FantasyMovie {
   id: string;
   title: string;
