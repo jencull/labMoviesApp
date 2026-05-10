@@ -191,7 +191,9 @@ PT-0
 
 * Prep moviesContextPage to support  TV series favourites, added tvFavourties, addToTVFavourites and removeFromTVFavourites, same pattern as for movies.
 
+## PT-6-2
 
+* Created AddTVToFavourites cardIcon using the AddToFavourites as a template
 
 
 
