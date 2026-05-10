@@ -179,6 +179,14 @@ PT-0
 * Added a page number variable to HomePage that changes when a user selects a different page
 * The page number is included in the key and is passed to the API so TMDB knows which page to send back
 * Implemented keepPreviousData so the movies already on screen stay visible while the new page is being called, no white screen while waiting. 
+* https://tanstack.com/query/latest/docs/framework/react/examples/pagination
+
+## PT-5-4
+
+* Add MUI pagination on bottom of home page - users can navigate between pages with different content being returned
+* https://stackoverflow.com/questions/64340077/getting-value-from-material-ui-pagination
+
+
 
 
 

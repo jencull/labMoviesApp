@@ -10,6 +10,8 @@ import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
 import AddToFavouritesIcon from '../components/cardIcons/AddToFavourites';
 import { useState } from "react";
+import Pagination from "@mui/material/Pagination";
+import Box from "@mui/material/Box";
 
 
 const titleFiltering = {
@@ -80,6 +82,13 @@ const HomePage = () => {
         genreFilter={filterValues[1].value}
         sortOption={sortOption}
       />
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}>
+        <Pagination
+          count={data?.total_pages}
+          page={page}
+          onChange={(_event, value) => setPage(value)}
+        />
+      </Box>
     </>
   );
 };
