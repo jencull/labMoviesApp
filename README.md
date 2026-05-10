@@ -187,6 +187,10 @@ PT-0
 * https://stackoverflow.com/questions/64340077/getting-value-from-material-ui-pagination
 
 
+## PT-6-1
+
+* Prep moviesContextPage to support  TV series favourites, added tvFavourties, addToTVFavourites and removeFromTVFavourites, same pattern as for movies.
+
 
 
 

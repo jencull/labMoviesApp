@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review, FantasyMovie } from "../types/movieAppTypes";
+import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review, FantasyMovie, TVSeriesOverview } from "../types/movieAppTypes";
 
 // (movie: MovieDetailsProps | DiscoverMovieOverviewProps) added to types and callbacks fix white screen on discover page
 // after lab 4
@@ -15,6 +15,9 @@ type MovieContextInterface = {
     removeFromMustWatch: (movie: MovieDetailsProps | DiscoverMovieOverviewProps) => void;
     fantasyMovies: FantasyMovie[];
     addFantasyMovie: (movie: FantasyMovie) => void;
+    tvFavourites: number[];
+    addToTVFavourites: (tvSeries: TVSeriesOverview) => void;
+    removeFromTVFavourites: (tvSeries: TVSeriesOverview) => void;
 }
 
 const initialContextState: MovieContextInterface = {
@@ -28,6 +31,9 @@ const initialContextState: MovieContextInterface = {
     removeFromMustWatch: () => {},
     fantasyMovies: [],
     addFantasyMovie: () => {},
+    tvFavourites: [],
+    addToTVFavourites: () => {},
+    removeFromTVFavourites: () => {},
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
@@ -36,6 +42,21 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [myReviews, setMyReviews] = useState<any>( {} ); // Lab uses {} logic
     const [mustWatch, setMustWatch] = useState<number[]>([]);
+    const [tvFavourites, setTVFavourites] = useState<number[]>([]);
+
+    const addToTVFavourites = useCallback((tvSeries: TVSeriesOverview) => {
+        setTVFavourites((prevTVFavourites) => {
+            if (!prevTVFavourites.includes(tvSeries.id)) {
+                return [...prevTVFavourites, tvSeries.id];
+            }
+            return prevTVFavourites;
+        });
+    }, []);
+
+    const removeFromTVFavourites = useCallback((tvSeries: TVSeriesOverview) => {
+        setTVFavourites((prevTVFavourites) => prevTVFavourites.filter((id) => id !== tvSeries.id));
+    }, []);
+
     const [fantasyMovies, setFantasyMovies] = useState<FantasyMovie[]>(
         JSON.parse(localStorage.getItem("fantasyMovies") ?? "[]")
     );  // https://felixgerschau.com/react-localstorage/ 
@@ -92,6 +113,9 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
                 removeFromMustWatch,
                 fantasyMovies,
                 addFantasyMovie,
+                tvFavourites,
+                addToTVFavourites,
+                removeFromTVFavourites,
             }}
         >
             {children}
