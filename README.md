@@ -174,6 +174,14 @@ PT-0
 
 * Added new type PaginatedMovieResults to movieAppTypes to handle pagination. Chose a new type rather than editing DiscoverMoviesProps to keep other functionality working as before.
 
+## PT-5-3
+
+* Added a page number variable to HomePage that changes when a user selects a different page
+* The page number is included in the key and is passed to the API so TMDB knows which page to send back
+* Implemented keepPreviousData so the movies already on screen stay visible while the new page is being called, no white screen while waiting. 
+
+
+
 
 
 

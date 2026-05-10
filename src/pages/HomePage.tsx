@@ -24,7 +24,12 @@ const genreFiltering = {
 };
 
 const HomePage = () => {
-  const { data, error, isLoading, isError } = useQuery<PaginatedMovieResults, Error>("discover", getMovies);
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading, isError } = useQuery<PaginatedMovieResults, Error>(
+    ["discover", page],
+    () => getMovies(page),
+    { keepPreviousData: true }
+  );
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
