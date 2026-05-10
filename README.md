@@ -166,8 +166,9 @@ PT-0
 
 * Routes & .env.example : both completed during earlier steps in order to view pages as they were build and explain .env security matters. 
 
+## PT-5-1
 
-
+* Updated getMovies in tmdb-api to accept page param to enable pagination
 
 
 
