@@ -195,6 +195,10 @@ PT-0
 
 * Created AddTVToFavourites cardIcon using the AddToFavourites as a template
 
+## PT-6-3
+
+* Created RemoveTVFromFavourites cardIcon using RemoveFromFavourites as a template
+
 
 
 
