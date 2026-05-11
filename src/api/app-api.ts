@@ -9,9 +9,15 @@ const getAuthHeader = (body: string = "") => {
 };
 
 export const addReview = (movieId: number, review: object) => {
-    const body = JSON.stringify({ movieId, ...review });
+    // Backend expects movieID (uppercase), date, and text.
+    // one of the errors that contributed to storing reviews not working
+    const body = JSON.stringify({
+        movieID: movieId,
+        date: new Date().toISOString().split("T")[0],
+        text: (review as any).content,
+    });
     return fetch(
-        `${import.meta.env.VITE_APP_API}/reviews`,
+        `${import.meta.env.VITE_APP_API}/movies/reviews`,
         {
             method: "POST",
             headers: getAuthHeader(body),
@@ -22,7 +28,7 @@ export const addReview = (movieId: number, review: object) => {
 
 export const getMovieReviewsFromAPI = (movieId: number) => {
     return fetch(
-        `${import.meta.env.VITE_APP_API}/reviews/${movieId}`,
+        `${import.meta.env.VITE_APP_API}/movies/${movieId}/reviews`,
         {
             method: "GET",
             headers: getAuthHeader(),
@@ -30,10 +36,10 @@ export const getMovieReviewsFromAPI = (movieId: number) => {
     ).then(res => res.json());
 };
 
-export const updateReview = (reviewId: string, review: object) => {
+export const updateReview = (movieId: string, review: object) => {
     const body = JSON.stringify(review);
     return fetch(
-        `${import.meta.env.VITE_APP_API}/reviews/${reviewId}`,
+        `${import.meta.env.VITE_APP_API}/movies/${movieId}/reviews`,
         {
             method: "PUT",
             headers: getAuthHeader(body),

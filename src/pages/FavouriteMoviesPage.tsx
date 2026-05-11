@@ -1,8 +1,9 @@
-import React, { useContext } from "react"
+import { useContext } from "react"
 import PageTemplate from "../components/TemplateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
+import { getMovieReviewsFromAPI } from "../api/app-api";
 import Spinner from "../components/Spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
@@ -11,6 +12,8 @@ import MovieFilterUI, {
 } from "../components/MovieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/RemoveFromFavourites";
 import WriteReview from "../components/cardIcons/WriteReview";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 
 const titleFiltering = {
@@ -30,7 +33,6 @@ const FavouriteMoviesPage = () => {
     [titleFiltering, genreFiltering]
   );
 
-  // Create an array of queries and run them in parallel.
   const favouriteMovieQueries = useQueries(
     movieIds.map((movieId) => {
       return {
@@ -40,7 +42,18 @@ const FavouriteMoviesPage = () => {
     })
   );
 
-  // Check if any of the parallel queries is still loading.
+  // Same useQuery pattern as above, but getting reviews from API
+  // for each favourite movie. Each query uses the key movieId so
+  // react-query caches them separately.
+  const reviewQueries = useQueries(
+    movieIds.map((movieId) => {
+      return {
+        queryKey: ["api-reviews", movieId],
+        queryFn: () => getMovieReviewsFromAPI(movieId),
+      };
+    })
+  );
+
   const isLoading = favouriteMovieQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
@@ -68,7 +81,7 @@ const FavouriteMoviesPage = () => {
           return (
             <>
               <RemoveFromFavourites {...movie} />
-              <WriteReview {...movie} />
+              <WriteReview {...movie as any} />
             </>
           );
         }}
@@ -77,7 +90,31 @@ const FavouriteMoviesPage = () => {
         onFilterValuesChange={changeFilterValues}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        yearFilter=""
+        minRatingFilter=""
+        languageFilter=""
       />
+      <Box sx={{ mt: 4, px: 2 }}>
+        <Typography variant="h4" gutterBottom>Reviews</Typography>
+        {movieIds.map((movieId, index) => {
+          const movie = allFavourites[index];
+          // Backend returns { data: [{ movieID, reviewerID, date, text }] }
+          // error that prevented reviews working correctly
+          const reviews = reviewQueries[index]?.data?.data ?? [];
+          if (!reviews.length) return null;
+          return (
+            <Box key={movieId} sx={{ mb: 3 }}>
+              <Typography variant="h6">{movie?.title}</Typography>
+              {reviews.map((review: { reviewerID: string; date: string; text: string }) => (
+                <Box key={review.reviewerID} sx={{ ml: 2, mb: 1 }}>
+                  <Typography variant="subtitle2">{review.reviewerID} — {review.date}</Typography>
+                  <Typography variant="body2">{review.text}</Typography>
+                </Box>
+              ))}
+            </Box>
+          );
+        })}
+      </Box>
     </>
   );
 };

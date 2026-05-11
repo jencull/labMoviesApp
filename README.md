@@ -259,6 +259,15 @@ So it looks like the search is only searching the current page.
 
 * Updated Snackbar to use a snackMessage that gives the user feedback on the POST request with a message tied to onSuccess or onError
 
+## PT-8-4
+
+* Added a second useQueries block to FavouriteMoviesPage to get the reviews. 
+* Reviews written by student will display below the favourite movies, in a 'Reviews' box, grouped by movie title. 
+
+## PT-0 revisted
+
+When testing the add review it kept failing with localhost 300 blocked by CORS policy. I used AI to debug, the chat is saved in AIUsage as PT-0_debugging_backend_integration.md. 
+
 
 
 
