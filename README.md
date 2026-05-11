@@ -230,6 +230,10 @@ PT-0
 
  *  Add year, minRating, language to FilterOption type in movieAppTypes.ts
 
+ ## PT-7-2
+
+ * Used FilterMoviesCard (onUserInput) as a guide to implement filtering for yearOption, ratingOptions and languageOptions in a MultiCriteriaSearch component. 
+
 
 
 
