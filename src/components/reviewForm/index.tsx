@@ -15,6 +15,8 @@ import Alert from "@mui/material/Alert";
 // https://tanstack.com/query/v3/docs/framework/react/reference/useMutation
 import { useMutation } from "react-query";
 import { addReview } from "../../api/app-api";
+// use circular progress to fit inside the button instead of spinner component
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 const ratings = [
@@ -90,11 +92,25 @@ const ReviewForm = (movie: MovieDetailsProps) => {
   const context = useContext(MoviesContext);
   const [rating, setRating] = useState(3);
   const [open, setOpen] = useState(false);
+  // snackMessage holds the text displayed in the Snackbar
+  const [snackMessage, setSnackMessage] = useState("");
 
-  // wrap the addReview API call in a useMutation hook
-  const { mutate } = useMutation(
+  // isLoading becomes true while the POST is being sent to the API.
+  // onSuccess/onError defines which message displays in the Snackbar
+  // so the message reflects the outcome of the POST request.
+  const { mutate, isLoading } = useMutation(
     (reviewData: { movieId: number; review: object }) =>
-      addReview(reviewData.movieId, reviewData.review)
+      addReview(reviewData.movieId, reviewData.review),
+    {
+      onSuccess: () => {
+        setSnackMessage("Review saved");
+        setOpen(true);
+      },
+      onError: () => {
+        setSnackMessage("Failed to save review — please try again");
+        setOpen(true);
+      },
+    }
   );
 
 
@@ -112,7 +128,6 @@ const ReviewForm = (movie: MovieDetailsProps) => {
     review.rating = rating;
     context.addReview(movie, review);
     mutate({ movieId: movie.id!, review });
-    setOpen(true);
   };
 
   return (
@@ -123,16 +138,16 @@ const ReviewForm = (movie: MovieDetailsProps) => {
       <Snackbar
         sx={styles.snack}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        open={open} 
+        open={open}
         onClose={handleSnackClose}
       >
         <Alert
-          severity="success"
+          severity={snackMessage === "Review saved" ? "success" : "error"}
           variant="filled"
           onClose={handleSnackClose}
         >
           <Typography variant="h4">
-            Thank you for submitting a review
+            {snackMessage}
           </Typography>
         </Alert>
       </Snackbar>
@@ -219,8 +234,9 @@ const ReviewForm = (movie: MovieDetailsProps) => {
             variant="contained"
             color="primary"
             sx={styles.submit}
+            disabled={isLoading}
           >
-            Submit
+            {isLoading ? <CircularProgress size={24} /> : "Submit"}
           </Button>
           <Button
             type="reset"

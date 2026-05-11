@@ -251,6 +251,14 @@ So it looks like the search is only searching the current page.
 * useMutation docs https://tanstack.com/query/v3/docs/framework/react/reference/useMutation
 * implememnted useMutate for PUT in reviewForm, followed pattern of useQuery (GET)
 
+## PT-8-2
+
+* Use circular progress inline in the submit button. While the POST is underway isLoading is triggered, uses the circular progress and the user can't submit a duplicate review
+
+## PT-8-3
+
+* Updated Snackbar to use a snackMessage that gives the user feedback on the POST request with a message tied to onSuccess or onError
+
 
 
 
