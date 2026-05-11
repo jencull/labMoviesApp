@@ -10,6 +10,11 @@ import { MoviesContext } from "../../contexts/moviesContext";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+// useMutation is react-query's hook for POST/PUT/DELETE (writes)
+// whereas useQuery which is for GET (reads). 
+// https://tanstack.com/query/v3/docs/framework/react/reference/useMutation
+import { useMutation } from "react-query";
+import { addReview } from "../../api/app-api";
 
 
 const ratings = [
@@ -86,6 +91,12 @@ const ReviewForm = (movie: MovieDetailsProps) => {
   const [rating, setRating] = useState(3);
   const [open, setOpen] = useState(false);
 
+  // wrap the addReview API call in a useMutation hook
+  const { mutate } = useMutation(
+    (reviewData: { movieId: number; review: object }) =>
+      addReview(reviewData.movieId, reviewData.review)
+  );
+
 
   const handleRatingChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRating(Number(event.target.value));
@@ -100,6 +111,7 @@ const ReviewForm = (movie: MovieDetailsProps) => {
     review.movieId = movie.id;
     review.rating = rating;
     context.addReview(movie, review);
+    mutate({ movieId: movie.id!, review });
     setOpen(true);
   };
 
