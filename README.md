@@ -215,7 +215,7 @@ PT-0
 
 ### Testing before commiting PT-6-6 showed the following issues: 
 
-* Register/confirm not redirecting, need to revisit Part 0. Register does actually work, got the code. Had to use the browser url bar to get to confirm page. Sign in working also. 
+* Register/confirm not redirecting, need to revisit Part 0. Register does actually work, got the code. Had to use the browser url bar to get to confirm page. Sign in working also.
 
 * Heart not showing on top of TV card, fixed.
 
@@ -226,7 +226,9 @@ PT-0
 * Changed Favourites to Movie Favourites for user clarity
 
 
-  
+ ## PT-7-1
+
+ *  Add year, minRating, language to FilterOption type in movieAppTypes.ts
 
 
 
