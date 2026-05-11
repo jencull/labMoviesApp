@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FilterCard from "./FilterMoviesCard";
+import MultiCriteriaSearch from "./MultiCriteriaSearch";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import { MovieDetailsProps } from "../types/movieAppTypes";
@@ -16,6 +17,22 @@ export const genreFilter = (movie: MovieDetailsProps, value: string) => {
     }
     const genreIds = movie.genres?.map((g) => g.id);
     return genreIds ? genreIds.includes(genreId) : false;
+};
+
+export const yearFilter = (movie: MovieDetailsProps, value: string): boolean => {
+    if (value === "0") return true;
+    return movie.release_date?.startsWith(value) ?? false;
+};
+
+export const minRatingFilter = (movie: MovieDetailsProps, value: string): boolean => {
+    const threshold = Number(value);
+    if (threshold === 0) return true;
+    return (movie.vote_average ?? 0) >= threshold;
+};
+
+export const languageFilter = (movie: MovieDetailsProps, value: string): boolean => {
+    if (value === "all") return true;
+    return movie.original_language === value;
 };
 
 const styles = {
@@ -35,9 +52,20 @@ type MovieFilterUIProps = {
     titleFilter: string;
     genreFilter: string;
     sortOption?: string;
+    yearFilter: string;
+    minRatingFilter: string;
+    languageFilter: string;
 }
 
-const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter, sortOption = "none" }: MovieFilterUIProps) => {
+const MovieFilterUI = ({
+    onFilterValuesChange,
+    titleFilter,
+    genreFilter,
+    sortOption = "none",
+    yearFilter,
+    minRatingFilter,
+    languageFilter,
+}: MovieFilterUIProps) => {
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     return (
@@ -60,6 +88,12 @@ const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter, sortOpt
                     titleFilter={titleFilter}
                     genreFilter={genreFilter}
                     sortOption={sortOption}
+                />
+                <MultiCriteriaSearch
+                    onUserInput={onFilterValuesChange}
+                    yearFilter={yearFilter}
+                    minRatingFilter={minRatingFilter}
+                    languageFilter={languageFilter}
                 />
             </Drawer>
         </>

@@ -234,6 +234,17 @@ PT-0
 
  * Used FilterMoviesCard (onUserInput) as a guide to implement filtering for yearOption, ratingOptions and languageOptions in a MultiCriteriaSearch component. 
 
+## PT-7-3
+
+* Added the new filter options to the MovieFilterUI
+* Registered all 3 in HomePage with useFiltering and included MultiCriteriaSearch in the existing filter drawer, below FilterMoviesCard.
+* Currently not working well, seems to be related to pagination. When the search is run it appears to only check the page that is displayed. 
+
+Example 1: selecting 2025 for movies on page one returns a 1 result with the pagination component still visible, on page 5 2025 returns 6 results. 
+
+Example 2: Selecting 2024 on page 1 returns a blank page with the pagination component visible. Page 5 returns 2 results for 2024. 
+
+So it looks like the search is only searching the current page.
 
 
 

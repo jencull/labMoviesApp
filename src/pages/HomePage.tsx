@@ -5,6 +5,9 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  yearFilter,
+  minRatingFilter,
+  languageFilter,
 } from "../components/MovieFilterUI";
 import { useQuery } from "react-query";
 import Spinner from "../components/Spinner";
@@ -24,6 +27,21 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
+const yearFiltering = {
+  name: "year",
+  value: "0",
+  condition: yearFilter,
+};
+const minRatingFiltering = {
+  name: "minRating",
+  value: "0",
+  condition: minRatingFilter,
+};
+const languageFiltering = {
+  name: "language",
+  value: "all",
+  condition: languageFilter,
+};
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
@@ -33,7 +51,7 @@ const HomePage = () => {
     { keepPreviousData: true }
   );
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
+    [titleFiltering, genreFiltering, yearFiltering, minRatingFiltering, languageFiltering]
   );
   const [sortOption, setSortOption] = useState("none");
 
@@ -51,11 +69,18 @@ const HomePage = () => {
       setSortOption(value);
       return;
     }
+    setPage(1);
     const changedFilter = { name: type, value: value };
     const updatedFilterSet =
       type === "title"
-        ? [changedFilter, filterValues[1]]
-        : [filterValues[0], changedFilter];
+        ? [changedFilter, filterValues[1], filterValues[2], filterValues[3], filterValues[4]]
+        : type === "genre"
+        ? [filterValues[0], changedFilter, filterValues[2], filterValues[3], filterValues[4]]
+        : type === "year"
+        ? [filterValues[0], filterValues[1], changedFilter, filterValues[3], filterValues[4]]
+        : type === "minRating"
+        ? [filterValues[0], filterValues[1], filterValues[2], changedFilter, filterValues[4]]
+        : [filterValues[0], filterValues[1], filterValues[2], filterValues[3], changedFilter];
     setFilterValues(updatedFilterSet);
   };
 
@@ -81,6 +106,9 @@ const HomePage = () => {
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
         sortOption={sortOption}
+        yearFilter={filterValues[2].value}
+        minRatingFilter={filterValues[3].value}
+        languageFilter={filterValues[4].value}
       />
       <Box sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}>
         <Pagination
