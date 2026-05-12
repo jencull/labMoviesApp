@@ -14,6 +14,9 @@ import RemoveFromFavourites from "../components/cardIcons/RemoveFromFavourites";
 import WriteReview from "../components/cardIcons/WriteReview";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import ArrowUpward from "@mui/icons-material/ArrowUpward";
+import ArrowDownward from "@mui/icons-material/ArrowDownward";
 
 
 const titleFiltering = {
@@ -28,7 +31,7 @@ const genreFiltering = {
 };
 
 const FavouriteMoviesPage = () => {
-  const { favourites: movieIds } = useContext(MoviesContext);
+  const { favourites: movieIds, reorderFavourites } = useContext(MoviesContext);
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [titleFiltering, genreFiltering]
   );
@@ -78,10 +81,25 @@ const FavouriteMoviesPage = () => {
         title="Favourite Movies"
         movies={displayedMovies}
         action={(movie) => {
+          const index = movieIds.indexOf(movie.id!);
           return (
             <>
               <RemoveFromFavourites {...movie} />
               <WriteReview {...movie as any} />
+              <IconButton
+                aria-label="move up"
+                onClick={() => reorderFavourites(index, index - 1)}
+                disabled={index === 0}
+              >
+                <ArrowUpward fontSize="large" />
+              </IconButton>
+              <IconButton
+                aria-label="move down"
+                onClick={() => reorderFavourites(index, index + 1)}
+                disabled={index === movieIds.length - 1}
+              >
+                <ArrowDownward fontSize="large" />
+              </IconButton>
             </>
           );
         }}

@@ -277,6 +277,12 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 
 * Favourites added to local storage (same pattern as with fantasyMovies). useEffect watches for changes and adds to localStorage.
 
+## PT-9-3
+
+* Added up/down arrows on each card
+* First card has up button disabled, last card has down button disabled 
+* Order of favourites stored in MoviesContext
+* Uses movieIds.indexOf(movie.id) to find position in the array rather than a looping across displayedMovies because thats a filtered result and may have a different index number
 
 
 
