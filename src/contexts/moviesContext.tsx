@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review, FantasyMovie, TVSeriesOverview } from "../types/movieAppTypes";
+import {  MovieDetailsProps, DiscoverMovieOverviewProps,  Review, FantasyMovie, TVSeriesOverview, Playlist } from "../types/movieAppTypes";
 
 // (movie: MovieDetailsProps | DiscoverMovieOverviewProps) added to types and callbacks fix white screen on discover page
 // after lab 4
@@ -19,6 +19,9 @@ type MovieContextInterface = {
     tvFavourites: number[];
     addToTVFavourites: (tvSeries: TVSeriesOverview) => void;
     removeFromTVFavourites: (tvSeries: TVSeriesOverview) => void;
+    playlists: Playlist[];
+    addPlaylist: (playlist: Playlist) => void;
+    addMovieToPlaylist: (playlistId: string, movieId: number) => void;
 }
 
 const initialContextState: MovieContextInterface = {
@@ -36,6 +39,9 @@ const initialContextState: MovieContextInterface = {
     tvFavourites: [],
     addToTVFavourites: () => {},
     removeFromTVFavourites: () => {},
+    playlists: [],
+    addPlaylist: () => {},
+    addMovieToPlaylist: () => {},
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
@@ -64,6 +70,10 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [fantasyMovies, setFantasyMovies] = useState<FantasyMovie[]>(
         JSON.parse(localStorage.getItem("fantasyMovies") ?? "[]")
     );  // https://felixgerschau.com/react-localstorage/ 
+
+    const [playlists, setPlaylists] = useState<Playlist[]>(
+        JSON.parse(localStorage.getItem("playlists") ?? "[]")
+    );  // https://felixgerschau.com/react-localstorage/
 
     const addToFavourites = useCallback((movie: MovieDetailsProps | DiscoverMovieOverviewProps) => {
         setFavourites((prevFavourites) => {
@@ -113,8 +123,24 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.setItem("fantasyMovies", JSON.stringify(fantasyMovies));
     }, [fantasyMovies]);
 
+    useEffect(() => {
+        localStorage.setItem("playlists", JSON.stringify(playlists));
+    }, [playlists]);
+
     const addFantasyMovie = useCallback((movie: FantasyMovie) => {
         setFantasyMovies((prev) => [...prev, movie]);
+    }, []);
+
+    const addPlaylist = useCallback((playlist: Playlist) => {
+        setPlaylists((prev) => [...prev, playlist]);
+    }, []);
+
+    const addMovieToPlaylist = useCallback((playlistId: string, movieId: number) => {
+        setPlaylists((prev) => prev.map((pl) =>
+            pl.id === playlistId && !pl.movieIds.includes(movieId)
+                ? { ...pl, movieIds: [...pl.movieIds, movieId] }
+                : pl
+        ));
     }, []);
 
     return (
@@ -134,6 +160,9 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
                 tvFavourites,
                 addToTVFavourites,
                 removeFromTVFavourites,
+                playlists,
+                addPlaylist,
+                addMovieToPlaylist,
             }}
         >
             {children}

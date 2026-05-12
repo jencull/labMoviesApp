@@ -292,6 +292,13 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 
 * Added Playlist type to movieAppTypes with id (string), title, theme and movidIds (array of num)
 
+## PT-10-2
+
+* Added playlists, addPlaylist and addMovieToPlaylist
+* Populates from localStorage (written by useEffect)
+* addMovieToPlayist checks the playlist doesn't already have the movie before adding it
+
+
 
 
 
