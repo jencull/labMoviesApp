@@ -298,7 +298,12 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * Populates from localStorage (written by useEffect)
 * addMovieToPlayist checks the playlist doesn't already have the movie before adding it
 
+## PT-10-3
 
+* Added PlaylistPage using FantasyMoviePage as a guide
+* Shows title, theme and movie count
+* Each card has a view button that will navigate to the details page (later update)
+* Create playlist button
 
 
 
