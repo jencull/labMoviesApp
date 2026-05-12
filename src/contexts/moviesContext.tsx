@@ -41,7 +41,9 @@ const initialContextState: MovieContextInterface = {
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
 
 const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [favourites, setFavourites] = useState<number[]>([]);
+    const [favourites, setFavourites] = useState<number[]>(
+        JSON.parse(localStorage.getItem("favourites") ?? "[]")
+    );  // https://felixgerschau.com/react-localstorage/
     const [myReviews, setMyReviews] = useState<any>( {} ); // Lab uses {} logic
     const [mustWatch, setMustWatch] = useState<number[]>([]);
     const [tvFavourites, setTVFavourites] = useState<number[]>([]);
@@ -103,6 +105,10 @@ const MoviesContextProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     // https://felixgerschau.com/react-localstorage/ 
+    useEffect(() => {
+        localStorage.setItem("favourites", JSON.stringify(favourites));
+    }, [favourites]);
+
     useEffect(() => {
         localStorage.setItem("fantasyMovies", JSON.stringify(fantasyMovies));
     }, [fantasyMovies]);

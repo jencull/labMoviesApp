@@ -273,6 +273,9 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 
 * Added reorderFavourites to MoviesContext, set up useCallback and setFavourites
 
+## PT-9-2
+
+* Favourites added to local storage (same pattern as with fantasyMovies). useEffect watches for changes and adds to localStorage.
 
 
 
