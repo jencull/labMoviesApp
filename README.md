@@ -305,6 +305,18 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * Each card has a view button that will navigate to the details page (later update)
 * Create playlist button
 
+## PT-10-4
+
+* Added PlaylistCreatePage, similar to FantasyMovieForm
+* 2 form fields, title and theme, both required
+* Search uses text input and a search button - user types a title and the movie appears. Results only update when button is clicked.
+* Clicking a result adds it to the playlist
+* Movie has a remove option https://mui.com/material-ui/react-chip/#deletable-chips
+* New playlist is created and the user is redirected to /playlists
+* Reset clears the form
+
+
+
 
 
 
