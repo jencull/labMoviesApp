@@ -269,6 +269,10 @@ So it looks like the search is only searching the current page.
 When testing the add review it kept failing with localhost 300 blocked by CORS policy. I used AI to debug, the chat is saved in AIUsage as PT-0_debugging_backend_integration.md. 
 
 
+## PT-9-1
+
+* Added reorderFavourites to MoviesContext, set up useCallback and setFavourites
+
 
 
 
