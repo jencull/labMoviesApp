@@ -284,6 +284,14 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * Order of favourites stored in MoviesContext
 * Uses movieIds.indexOf(movie.id) to find position in the array rather than a looping across displayedMovies because thats a filtered result and may have a different index number
 
+## PT-9-4
+
+* Testing, all works as expected. 
+
+## PT-10-1
+
+* Added Playlist type to movieAppTypes with id (string), title, theme and movidIds (array of num)
+
 
 
 

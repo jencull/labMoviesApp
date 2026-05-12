@@ -108,3 +108,10 @@ export interface FantasyMovie {
   runtime: number;
   productionCompanies: string[];
 }
+
+export interface Playlist {
+  id: string;
+  title: string;
+  theme: string;
+  movieIds: number[];
+}
