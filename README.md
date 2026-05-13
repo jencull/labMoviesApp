@@ -315,8 +315,11 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * New playlist is created and the user is redirected to /playlists
 * Reset clears the form
 
+## PT-10-5
 
-
+* Created PlaylistDetailsPage using FavouriteMoviesPage as a guide
+* Uses useQueries to get movie details of each movie in the play list (same pattern as FavouriteMoviesPage)
+* Playlist not found message if id doesn't match 
 
 
 
