@@ -321,6 +321,13 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * Uses useQueries to get movie details of each movie in the play list (same pattern as FavouriteMoviesPage)
 * Playlist not found message if id doesn't match 
 
+## PT-10-6
+
+* Added routes for /playlists, /playlists/create & /playlists/:id
+* Added Playlists to the menu in SiteHeader
+
+
+
 
 
 

@@ -16,6 +16,9 @@ import TVDetailsPage from './pages/TVDetailsPage';
 import FavouriteTVPage from './pages/FavouriteTVPage';
 import FantasyMovieCreatePage from './pages/FantasyMovieCreatePage';
 import FantasyMoviePage from './pages/FantasyMoviePage';
+import PlaylistPage from './pages/PlaylistPage';
+import PlaylistCreatePage from './pages/PlaylistCreatePage';
+import PlaylistDetailPage from './pages/PlaylistDetailPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import ConfirmSignUpPage from './pages/ConfirmSignUpPage';
@@ -51,7 +54,9 @@ const App = () => {
         <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
         <Route path="/fantasy-movie" element={<FantasyMoviePage />} />
         <Route path="/fantasy-movie/create" element={<PrivateRoute><FantasyMovieCreatePage /></PrivateRoute>} />
-        <Route path="/playlists/create" element={<PrivateRoute><Navigate to="/" /></PrivateRoute>} />
+        <Route path="/playlists" element={<PlaylistPage />} />
+        <Route path="/playlists/create" element={<PrivateRoute><PlaylistCreatePage /></PrivateRoute>} />
+        <Route path="/playlists/:id" element={<PlaylistDetailPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/confirm" element={<ConfirmSignUpPage />} />
