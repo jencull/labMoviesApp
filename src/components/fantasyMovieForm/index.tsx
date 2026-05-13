@@ -10,11 +10,13 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { MoviesContext } from "../../contexts/moviesContext";
 import { getGenres } from "../../api/tmdb-api";
-import { FantasyMovie, genreData } from "../../types/movieAppTypes";
+import { CastMember, FantasyMovie, genreData } from "../../types/movieAppTypes";
 
 const styles = {
   root: {
@@ -64,6 +66,29 @@ const FantasyMovieForm = () => {
   const { data: genreData } = useQuery<genreData>("genres", getGenres);
   const [genreNames, setGenreNames] = useState<string[]>([]);
 
+  // cast members managed in local state, separate from react-hook-form
+  const [castMembers, setCastMembers] = useState<CastMember[]>([]);
+
+  const handleAddCastMember = () => {
+    setCastMembers((prev) => [...prev, { roleName: "", description: "" }]);
+  };
+
+  const handleRoleNameChange = (index: number, value: string) => {
+    setCastMembers((prev) =>
+      prev.map((member, i) => (i === index ? { ...member, roleName: value } : member))
+    );
+  };
+
+  const handleDescriptionChange = (index: number, value: string) => {
+    setCastMembers((prev) =>
+      prev.map((member, i) => (i === index ? { ...member, description: value } : member))
+    );
+  };
+
+  const handleRemoveCastMember = (index: number) => {
+    setCastMembers((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const context = useContext(MoviesContext);
   const navigate = useNavigate();
 
@@ -82,6 +107,7 @@ const FantasyMovieForm = () => {
       runtime: data.runtime,
       id: Date.now().toString(),
       productionCompanies: [data.productionCompany],
+      cast: castMembers,
     };
     context.addFantasyMovie(newFantasyMovie);
     navigate("/fantasy-movie");
@@ -253,6 +279,39 @@ const FantasyMovieForm = () => {
           </Typography>
         )}
 
+        <Typography variant="h6" component="p" sx={{ marginTop: 2 }}>
+          Cast
+        </Typography>
+        {castMembers.map((member, index) => (
+          <Box key={index} sx={{ display: "flex", gap: 2, alignItems: "center", marginTop: 1 }}>
+            <TextField
+              variant="outlined"
+              label="Role Name"
+              value={member.roleName}
+              onChange={(e) => handleRoleNameChange(index, e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              label="Description"
+              value={member.description}
+              onChange={(e) => handleDescriptionChange(index, e.target.value)}
+            />
+            <IconButton
+              aria-label="remove cast member"
+              onClick={() => handleRemoveCastMember(index)}
+            >
+              <DeleteIcon color="primary" fontSize="large" />
+            </IconButton>
+          </Box>
+        ))}
+        <Button
+          variant="outlined"
+          onClick={handleAddCastMember}
+          sx={{ marginTop: 1 }}
+        >
+          Add Cast Member
+        </Button>
+
         <Box>
           <Button
             type="submit"
@@ -276,6 +335,7 @@ const FantasyMovieForm = () => {
                 runtime: 0,
                 productionCompany: "",
               });
+              setCastMembers([]);
             }}
           >
             Reset

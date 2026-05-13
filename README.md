@@ -331,6 +331,12 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * Added CastMember type to movieAppTypes
 * Created optional fields for cast and posterURL on the FantasyMovie type. 
 
+## PT-11-2
+
+* Add IconButton and DeleteIcon
+* useState for the cast list
+* handler for each of CastChange & RoleNameChange
+
 
 
 
