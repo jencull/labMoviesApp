@@ -326,6 +326,11 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * Added routes for /playlists, /playlists/create & /playlists/:id
 * Added Playlists to the menu in SiteHeader
 
+## PT-11-1
+
+* Added CastMember type to movieAppTypes
+* Created optional fields for cast and posterURL on the FantasyMovie type. 
+
 
 
 

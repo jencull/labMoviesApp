@@ -99,6 +99,11 @@ export type PaginatedMovieResults = {
   total_pages: number;
 };
 
+export interface CastMember {
+  roleName: string;
+  description: string;
+}
+
 export interface FantasyMovie {
   id: string;
   title: string;
@@ -107,6 +112,8 @@ export interface FantasyMovie {
   releaseDate: string;
   runtime: number;
   productionCompanies: string[];
+  cast?: CastMember[];
+  posterUrl?: string;
 }
 
 export interface Playlist {
