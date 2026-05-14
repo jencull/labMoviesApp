@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext } from "react";
@@ -49,7 +48,7 @@ const FantasyMovieForm = () => {
     defaultValues: {
       title: "",
       overview: "",
-      genres: [] as string[],
+      genres: [""],
       releaseDate: "",
       runtime: 0,
       productionCompany: "",
@@ -195,11 +194,8 @@ const FantasyMovieForm = () => {
               <InputLabel id="genres-label">Genres</InputLabel>
               <Select
                 labelId="genres-label"
-                multiple
-                value={value}
-                onChange={onChange}
-                input={<OutlinedInput label="Genres" />}
-                renderValue={(selected) => (selected as string[]).join(", ")}
+                value={value[0] ?? ""}
+                onChange={(e) => onChange([e.target.value])}
               >
                 {genreNames.map((name) => (
                   <MenuItem key={name} value={name}>
@@ -369,7 +365,7 @@ const FantasyMovieForm = () => {
               reset({
                 title: "",
                 overview: "",
-                genres: [] as string[],
+                genres: [""],
                 releaseDate: "",
                 runtime: 0,
                 productionCompany: "",

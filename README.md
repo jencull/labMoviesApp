@@ -355,7 +355,9 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 
 * Updated FantasyMoviePage to display cast members and poster 
 
+## Debugging
 
+* Removed "All you ever wanted to know about movies" from the site header as the test was wrapping, squashed and overlapping (in smaller window size)
 
 
 # React + TypeScript + Vite
