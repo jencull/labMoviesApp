@@ -337,7 +337,13 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * useState for the cast list
 * handler for each of CastChange & RoleNameChange
 
+## PT-11-3
 
+* Update fantasyMovieForm to allow poster upload
+* the FileReader.readAsDataURL() method of handling the poster upload was suggested at line 373 in the tasks.md (spec driven development work)
+* It is a browser Web API that converts the selected image file into a base64 data url and stores it in React local state (useState)
+* https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+* The upload is done via a button.
 
 
 

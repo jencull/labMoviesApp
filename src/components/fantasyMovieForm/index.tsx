@@ -3,6 +3,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useQuery } from "react-query";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CardMedia from "@mui/material/CardMedia";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
@@ -69,6 +70,18 @@ const FantasyMovieForm = () => {
   // cast members managed in local state, separate from react-hook-form
   const [castMembers, setCastMembers] = useState<CastMember[]>([]);
 
+  // poster image stored as a data URL in React local state (useState)
+  const [posterUrl, setPosterUrl] = useState<string>("");
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+  const handlePosterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setPosterUrl(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
   const handleAddCastMember = () => {
     setCastMembers((prev) => [...prev, { roleName: "", description: "" }]);
   };
@@ -108,6 +121,7 @@ const FantasyMovieForm = () => {
       id: Date.now().toString(),
       productionCompanies: [data.productionCompany],
       cast: castMembers,
+      posterUrl: posterUrl,
     };
     context.addFantasyMovie(newFantasyMovie);
     navigate("/fantasy-movie");
@@ -312,6 +326,31 @@ const FantasyMovieForm = () => {
           Add Cast Member
         </Button>
 
+        <Typography variant="h6" component="p" sx={{ marginTop: 2 }}>
+          Poster
+        </Typography>
+        <Button
+          variant="outlined"
+          component="label"
+          sx={{ marginTop: 1 }}
+        >
+          Upload Poster Image
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handlePosterChange}
+          />
+        </Button>
+        {posterUrl !== "" && (
+          <CardMedia
+            component="img"
+            image={posterUrl}
+            alt="Poster preview"
+            sx={{ marginTop: 2, maxWidth: 240, borderRadius: 1 }}
+          />
+        )}
+
         <Box>
           <Button
             type="submit"
@@ -336,6 +375,7 @@ const FantasyMovieForm = () => {
                 productionCompany: "",
               });
               setCastMembers([]);
+              setPosterUrl("");
             }}
           >
             Reset
