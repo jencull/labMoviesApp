@@ -4,6 +4,7 @@ import { MoviesContext } from "../contexts/moviesContext";
 import { FantasyMovie } from "../types/movieAppTypes";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
@@ -72,6 +73,26 @@ const FantasyMoviePage = () => {
               <Typography variant="body2" component="p">
                 Production Company: {movie.productionCompanies[0]}
               </Typography>
+              {movie.cast && movie.cast.length > 0 && (
+                <>
+                  <Typography variant="body2" component="p" sx={{ marginTop: 1 }}>
+                    <strong>Cast:</strong>
+                  </Typography>
+                  {movie.cast.map((member, index) => (
+                    <Typography key={index} variant="body2" component="p">
+                      {member.roleName} — {member.description}
+                    </Typography>
+                  ))}
+                </>
+              )}
+              {movie.posterUrl && (
+                <CardMedia
+                  component="img"
+                  image={movie.posterUrl}
+                  alt={`${movie.title} poster`}
+                  sx={{ marginTop: 2, maxWidth: 240, borderRadius: 1 }}
+                />
+              )}
             </CardContent>
           </Card>
         ))

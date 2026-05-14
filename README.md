@@ -351,6 +351,10 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * In PT-11-2 task the task stated `data included in the submitted form object`
 * But in this task it was assumed the page would build the object so there was some confusion when the spec was generated.
 
+## PT-11-5
+
+* Updated FantasyMoviePage to display cast members and poster 
+
 
 
 

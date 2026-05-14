@@ -369,7 +369,7 @@ const FantasyMovieForm = () => {
               reset({
                 title: "",
                 overview: "",
-                genres: [],
+                genres: [] as string[],
                 releaseDate: "",
                 runtime: 0,
                 productionCompany: "",
