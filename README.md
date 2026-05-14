@@ -345,6 +345,12 @@ When testing the add review it kept failing with localhost 300 blocked by CORS p
 * https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 * The upload is done via a button.
 
+## PT-11-4
+
+* No changes to FantasyMovieCreatePage
+* In PT-11-2 task the task stated `data included in the submitted form object`
+* But in this task it was assumed the page would build the object so there was some confusion when the spec was generated.
+
 
 
 
